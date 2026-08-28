@@ -48,7 +48,7 @@ const BUILD = {
     {
       member: 'mpv.exe',
       asset: 'mpv-x86_64-20260826-git-c318236b88.7z',
-      sha256: '1ccee88f10d4049906f339b6718c87bec7e94c6ec86652d4de70082959da7b27',
+      sha256: '69ed2d037f976987970d94c630496254c1d121f2e37cd4743b98465cec27882c',
       // How to find the same binary in a release this file has never seen (see
       // `resolve()`). Anchored, because every release also holds -dev, -debug,
       // -lgpl and AVX2-only (-v3) variants of the same name.
