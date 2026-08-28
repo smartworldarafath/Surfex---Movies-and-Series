@@ -1,0 +1,24 @@
+pkgbase = surfex-bin
+	pkgdesc = Stream movies & series to a real player — a media library over an embedded BitTorrent engine
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/smartworldarafath/Surfex---Movies-and-Series
+	arch = x86_64
+	license = MIT
+	depends = webkit2gtk-4.1
+	depends = gtk3
+	depends = libayatana-appindicator
+	depends = mpv
+	depends = ffmpeg
+	depends = hicolor-icon-theme
+	provides = surfex
+	conflicts = surfex
+	options = !strip
+	options = !debug
+	source = surfex-bin-0.1.0.deb::https://github.com/smartworldarafath/Surfex---Movies-and-Series/releases/download/v0.1.0/Surfex_0.1.0_amd64.deb
+	source = LICENSE-0.1.0::https://raw.githubusercontent.com/smartworldarafath/Surfex---Movies-and-Series/v0.1.0/LICENSE
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = surfex-bin
+

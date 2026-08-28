@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Application
+Name=Surfex
+Comment=Movies and Series media library and player
+Exec=surfex %u
+Icon=io.github.smartworldarafath.Surfex
+Terminal=false
+Categories=AudioVideo;Player;
+Keywords=torrent;bittorrent;mpv;video;movies;series;streaming;
+# The app registers these itself at startup, but inside the sandbox that write
+# lands in ~/.var/app/…/data/applications where the host's xdg-open never looks.
+# Declaring them here is what makes a surfex:// link work from a browser.
+MimeType=x-scheme-handler/surfex;x-scheme-handler/stremio;
+# Tauri names the window class after the binary, not the desktop file.
+StartupWMClass=surfex
+StartupNotify=true
+

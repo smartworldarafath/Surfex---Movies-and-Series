@@ -1,6 +1,7 @@
 MIT License
 
-Copyright (c) 2026 Arafath Rahman
+Copyright (c) 2026 Surfex contributors
+Copyright (c) 2024 Nicola Spadari (portions derived from the Nuxtor template)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +20,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+This licence covers Surfex's own source only. Components it ships or depends on
+carry their own terms — in particular mpv (GPLv2 or later), which the Windows
+build bundles as a separate executable. A binary distribution that includes mpv
+must carry mpv's licence and an offer of its source.
