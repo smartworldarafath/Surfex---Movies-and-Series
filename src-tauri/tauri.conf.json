@@ -43,7 +43,7 @@
 	"identifier": "com.surfex.app",
 	"plugins": {
 		"updater": {
-			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDM2NDY4OUExNDhBQUUwNUMKUldSYzRLcElvWWxHTnNWUnF0bWh1MXBMK1dFZ21MaC9mRFliYjFEZU1KZEFRVzR4QmcvNFA3TG4K",
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDZFOThGN0RFQTA2RUE5N0IKUldSN3FXNmczdmVZYnRoakMxNWVRR3pTSFMvbnpVQjFVbEdwN3dINVR6cFl3VmpVSlVhdlR3OHQK",
 			"endpoints": [
 				"https://github.com/smartworldarafath/Surfex---Movies-and-Series/releases/latest/download/latest.json"
 			],

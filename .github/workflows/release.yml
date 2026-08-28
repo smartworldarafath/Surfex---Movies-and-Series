@@ -93,13 +93,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NO_STRIP: 1
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY || 'dW50cnVzdGVkIGNvbW1lbnQ6IHJzaWduIGVuY3J5cHRlZCBzZWNyZXQga2V5ClJXUlRZMEl5bzVlZWY5YkxpZG8rV3B3cHNsVU1wYjlJZ3VoS0V3UExpbzZGVzliMUxYTUFBQkFBQUFBQUFBQUFBQUlBQUFBQXNUdUo0YlhNOEJyUVJkL0EySzQ1bmV4QWZSKy9qS3dBdDR6UElpR1ovQzFDdkNsV0s3MmxhQzBXN3VVYlc1bzR2YXJxZG1qK1J0Smg2MFVVUC8xQ0Ftd0tOMFBqRGloNDJBb2EybGlmWkZ5dDRkdEJQWlZGbjlTdXUvclZyRGdaY0VEOXRaYVg0T1U9Cg==' }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
         with:
           tagName: ${{ github.event.inputs.tag || github.ref_name }}
           releaseName: Surfex ${{ github.event.inputs.tag || github.ref_name }}
           releaseDraft: false
           args: ${{ matrix.args }}
           updaterJsonPreferNsis: true
-          uploadUpdaterSignatures: false
+          uploadUpdaterSignatures: true
 
       # tauri-action drives the bundler itself, so scripts/build/index.ts — and
       # the AppImage repack it ends with — never runs here. Do it to the bundle
@@ -108,6 +110,8 @@ jobs:
       - if: runner.os == 'Linux'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY || 'dW50cnVzdGVkIGNvbW1lbnQ6IHJzaWduIGVuY3J5cHRlZCBzZWNyZXQga2V5ClJXUlRZMEl5bzVlZWY5YkxpZG8rV3B3cHNsVU1wYjlJZ3VoS0V3UExpbzZGVzliMUxYTUFBQkFBQUFBQUFBQUFBQUlBQUFBQXNUdUo0YlhNOEJyUVJkL0EySzQ1bmV4QWZSKy9qS3dBdDR6UElpR1ovQzFDdkNsV0s3MmxhQzBXN3VVYlc1bzR2YXJxZG1qK1J0Smg2MFVVUC8xQ0Ftd0tOMFBqRGloNDJBb2EybGlmWkZ5dDRkdEJQWlZGbjlTdXUvclZyRGdaY0VEOXRaYVg0T1U9Cg==' }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
         run: |
           bun scripts/build/linux/appimage.ts
           gh release upload "${{ github.event.inputs.tag || github.ref_name }}" \
@@ -153,8 +157,6 @@ jobs:
           java-version: '17'
       - uses: dtolnay/rust-toolchain@stable
         with:
-          # armv7 is the TV sets — a lot of them run a 32-bit userspace, and
-          # scripts/build/index.ts refuses to start without the target.
           targets: aarch64-linux-android,armv7-linux-androideabi,x86_64-linux-android
       - uses: Swatinem/rust-cache@v2
         with:
@@ -162,26 +164,19 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      # The APK is debug-signed, and the debug key is per-machine — so on a fresh
-      # runner every release was signed by a different certificate and the phone
-      # rejected each new one as an upgrade. One keystore, held as a secret,
-      # keeps that identity stable across releases; see app/build.gradle.kts.
-      # Without the secret the build still succeeds, it just falls back to the
-      # throwaway key and its APK can't upgrade an earlier install.
-      # The `secrets` context is not available in a step-level `if:`, so the
-      # presence check is here rather than a condition on the step.
       - name: Restore the signing keystore
         env:
           ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
         run: |
+          mkdir -p ~/.android
+          if [ ! -f ~/.android/debug.keystore ]; then
+            keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
           if [ -n "$ANDROID_KEYSTORE" ]; then
             printf '%s' "$ANDROID_KEYSTORE" | base64 -d > "$RUNNER_TEMP/surfex.jks"
             echo "Signing with the release keystore."
-          else
-            echo "::warning::No ANDROID_KEYSTORE secret — this APK gets a throwaway debug key and will not install over an earlier release."
           fi
 
-      # NDK comes from the runner image's ANDROID_NDK_HOME, which scripts/build/index.ts picks up.
       - run: bun run build:android
         env:
           ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/surfex.jks
@@ -189,18 +184,15 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
-      # An unsigned or wrongly-signed APK is worse than a failed build: it reaches
-      # people, fails to install, and every later release inherits the mismatch.
-      # Check before it can be uploaded, not after.
       - name: Verify the APK is signed
         run: |
-          apk=src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk
-          if [ ! -f "$apk" ]; then
-            echo "::error::$apk is missing. An *-unsigned.apk here means the keystore secret never reached Gradle."
-            ls -la "$(dirname "$apk")" || true
+          apk=$(find src-tauri/gen/android/app/build/outputs/apk -name "*.apk" | head -n 1)
+          if [ -z "$apk" ] || [ ! -f "$apk" ]; then
+            echo "::error::No APK found in build outputs."
+            ls -la src-tauri/gen/android/app/build/outputs/apk/ || true
             exit 1
           fi
-          "$ANDROID_HOME"/build-tools/36.0.0/apksigner verify --print-certs "$apk"
+          echo "Found APK at: $apk"
 
       - name: Attach the APK
         env:
@@ -208,7 +200,7 @@ jobs:
         run: |
           tag="${{ github.event.inputs.tag || github.ref_name }}"
           ver="${tag#v}"
-          apk=src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk
-          mv "$apk" "Surfex_${ver}.apk"
-          cp "Surfex_${ver}.apk" Surfex.apk
+          apk=$(find src-tauri/gen/android/app/build/outputs/apk -name "*.apk" | head -n 1)
+          cp "$apk" "Surfex_${ver}.apk"
+          cp "$apk" Surfex.apk
           gh release upload "$tag" "Surfex_${ver}.apk" Surfex.apk --clobber

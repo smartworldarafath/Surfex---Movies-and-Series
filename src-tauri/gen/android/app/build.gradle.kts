@@ -31,11 +31,9 @@ android {
     compileSdk = 36
     namespace = "com.surfex.app"
     signingConfigs {
-        // Bound to a local first: a script-level `val` is a property of the
-        // script class, which Kotlin will not smart-cast inside this lambda.
-        val keystore = ciKeystore
-        if (keystore != null) {
-            create("ci") {
+        create("ci") {
+            val keystore = ciKeystore
+            if (keystore != null) {
                 storeFile = file(keystore)
                 storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
                 keyAlias = System.getenv("ANDROID_KEY_ALIAS")
@@ -60,28 +58,32 @@ android {
             isDebuggable = true
             isJniDebuggable = true
             isMinifyEnabled = false
-            packaging {                jniLibs.keepDebugSymbols.add("*/arm64-v8a/*.so")
+            packaging {
+                jniLibs.keepDebugSymbols.add("*/arm64-v8a/*.so")
                 jniLibs.keepDebugSymbols.add("*/armeabi-v7a/*.so")
                 jniLibs.keepDebugSymbols.add("*/x86/*.so")
                 jniLibs.keepDebugSymbols.add("*/x86_64/*.so")
             }
         }
         getByName("release") {
-            // Without this the bundler emits app-universal-release-unsigned.apk and
-            // Android refuses to install it.
-            signingConfig = if (ciKeystore != null) signingConfigs.getByName("ci") else signingConfigs.getByName("debug")
+            if (ciKeystore != null) {
+                signingConfig = signingConfigs.getByName("ci")
+            } else {
+                signingConfig = signingConfigs.getByName("debug")
+            }
             // The torrent engine is plain http on 127.0.0.1, inside this very
             // process, and every stream, poll and playback request goes through
             // it. A release APK blocks cleartext by default, which would leave
             // the app unable to reach its own engine with nothing in the log to
             // explain it — same reason the debug build sets it.
             manifestPlaceholders["usesCleartextTraffic"] = "true"
-            isMinifyEnabled = true
-            proguardFiles(
-                *fileTree(".") { include("**/*.pro") }
-                    .plus(getDefaultProguardFile("proguard-android-optimize.txt"))
-                    .toList().toTypedArray()
-            )
+            isMinifyEnabled = false
+            packaging {
+                jniLibs.keepDebugSymbols.add("*/arm64-v8a/*.so")
+                jniLibs.keepDebugSymbols.add("*/armeabi-v7a/*.so")
+                jniLibs.keepDebugSymbols.add("*/x86/*.so")
+                jniLibs.keepDebugSymbols.add("*/x86_64/*.so")
+            }
         }
     }
     kotlinOptions {
