@@ -62,8 +62,8 @@ const BUILD = {
      */
     {
       member: 'ffmpeg.exe',
-      asset: 'ffmpeg-x86_64-git-a1050d48b.7z',
-      sha256: 'c67b9b4a36a2d823eefb7e33b65031778ccd90ab3fccc88a77390dbb76c4add5',
+      asset: 'ffmpeg-x86_64-git-a8c7afa7d.7z',
+      sha256: '506ac478f2bf4b6dd8087c33d907ca573629713fe6067fac2140edb7760b1746',
       match: /^ffmpeg-x86_64-git-[0-9a-f]+\.7z$/,
     },
   ],

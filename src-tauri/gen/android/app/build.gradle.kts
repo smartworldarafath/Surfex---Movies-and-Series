@@ -68,11 +68,8 @@ android {
         }
         getByName("release") {
             // Without this the bundler emits app-universal-release-unsigned.apk and
-            // Android refuses to install it — which is the whole reason releases used
-            // to go out as debug builds.
-            if (ciKeystore != null) {
-                signingConfig = signingConfigs.getByName("ci")
-            }
+            // Android refuses to install it.
+            signingConfig = if (ciKeystore != null) signingConfigs.getByName("ci") else signingConfigs.getByName("debug")
             // The torrent engine is plain http on 127.0.0.1, inside this very
             // process, and every stream, poll and playback request goes through
             // it. A release APK blocks cleartext by default, which would leave
