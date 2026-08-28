@@ -66,7 +66,7 @@ cleanup:
   - '*.la'
 
 modules:
-  # ffmpeg is built rather than taken from the runtime because Ventic runs the
+  # ffmpeg is built rather than taken from the runtime because Surfex runs the
   # `ffmpeg` *binary* for two things — one mjpeg frame for the seek-bar preview,
   # and an RMS envelope for subtitle sync (see `thumbnail` and `audio_envelope`
   # in src-tauri/src/lib.rs). Encoders, muxers and programs are therefore all
@@ -166,7 +166,7 @@ modules:
       # The player launches the mpv process; nothing here links libmpv. (macOS
       # does, but macOS is not built from this manifest.)
       - -Dlibmpv=false
-      # Ventic sends commands down input-ipc-server, so mpv's own scripting
+      # Surfex sends commands down input-ipc-server, so mpv's own scripting
       # runtimes are dead weight.
       - -Dlua=disabled
       - -Djavascript=disabled
@@ -208,7 +208,7 @@ modules:
           stable-only: true
           url-template: https://github.com/mpv-player/mpv/archive/v$version.tar.gz
 
-  - name: ventic
+  - name: surfex
     buildsystem: simple
     build-options:
       append-path: /usr/lib/sdk/node22/bin:/usr/lib/sdk/rust-stable/bin
@@ -216,7 +216,7 @@ modules:
         # flatpak-cargo-generator writes the vendored registry and the config
         # that points cargo at it into this directory. It is $FLATPAK_BUILDER_BUILDDIR
         # spelled out, because cargo reads CARGO_HOME before any of our shell runs.
-        CARGO_HOME: /run/build/ventic/cargo
+        CARGO_HOME: /run/build/surfex/cargo
         # Baked into the frontend bundle by nuxt.config.ts. Public on purpose:
         # this same token is already readable in every .deb, .AppImage and .exe
         # on the releases page, so a Flathub build is not where it leaks. A user

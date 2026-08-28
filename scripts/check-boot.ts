@@ -98,7 +98,7 @@ function launch(options: {
       getItem(key: string) {
         if (options.noStorage)
           throw new Error('access denied')
-        return key === 'surfex.ground' || key === 'ventic.ground' ? options.remembered ?? null : null
+        return key === 'surfex.ground' ? options.remembered ?? null : null
       },
     },
     structuredClone: (value: unknown) => value,
@@ -116,7 +116,6 @@ function launch(options: {
   }
   if (options.bridge) {
     sandbox.SurfexScreen = { tv: () => true }
-    sandbox.VenticScreen = { tv: () => true }
   }
   sandbox.window = sandbox
 
@@ -128,9 +127,9 @@ function launch(options: {
   vm.runInContext(SOURCE, context)
 
   return {
-    boot: sandbox.__surfexBoot || sandbox.__venticBoot,
-    panel: () => body.children.find((c: any) => c.id === 'surfex-boot-error' || c.id === 'ventic-boot-error') ?? null,
-    hint: () => body.children.find((c: any) => c.id === 'surfex-boot-hint' || c.id === 'ventic-boot-hint') ?? null,
+    boot: sandbox.__surfexBoot,
+    panel: () => body.children.find((c: any) => c.id === 'surfex-boot-error') ?? null,
+    hint: () => body.children.find((c: any) => c.id === 'surfex-boot-hint') ?? null,
     ground: () => html.style.backgroundColor,
     mount: () => root.appendChild(element('div')),
     advance(ms: number) {

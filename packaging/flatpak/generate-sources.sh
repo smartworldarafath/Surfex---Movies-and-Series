@@ -2,7 +2,7 @@
 # Produce the three generated files a Flathub build needs, and optionally drop a
 # complete submission into a flathub repo checkout.
 #
-#   TMDB_API=... ./generate-sources.sh v0.2.3 ~/src/flathub-ventic
+#   TMDB_API=... ./generate-sources.sh v0.2.3 ~/src/flathub-surfex
 #
 # Flathub builds with no network, so every byte cargo and npm will read has to
 # be declared as a source with a hash up front. That is what the two generators

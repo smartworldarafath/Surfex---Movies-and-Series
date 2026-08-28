@@ -179,17 +179,31 @@ function openUrl(url: string) {
               </v-chip>
             </div>
             <p class="text-body-small opacity-70">
-              {{ $t('Send payments via RedotPay ID or transfer.') }}
+              {{ $t('Send payments via RedotPay QR, ID or transfer.') }}
             </p>
 
-            <div class="rounded-lg bg-surface-container-high/60 p-3 text-body-small mt-2">
+            <div class="my-2 flex justify-center">
+              <div class="rounded-xl bg-surface-container-highest/50 p-2 shadow-md">
+                <img
+                  src="/donations/redotpay-qr.jpg"
+                  alt="RedotPay QR Code"
+                  class="size-44 object-contain rounded-lg"
+                >
+              </div>
+            </div>
+
+            <div class="rounded-lg bg-surface-container-high/60 p-3 text-body-small">
               <div class="flex items-center justify-between">
+                <span class="opacity-60">{{ $t('RedotPay ID') }}:</span>
+                <span class="font-mono font-bold text-red-400">1965421414</span>
+              </div>
+              <div class="mt-1 flex items-center justify-between">
                 <span class="opacity-60">{{ $t('User ID / Tag') }}:</span>
-                <span class="font-mono font-bold text-red-400">@arafath_rahman9</span>
+                <span class="font-mono font-semibold">@arafath_rahman9</span>
               </div>
               <div class="mt-1 flex items-center justify-between">
                 <span class="opacity-60">{{ $t('Email') }}:</span>
-                <span class="font-mono">arafathrahman710@gmail.com</span>
+                <span class="font-mono text-xs">arafathrahman710@gmail.com</span>
               </div>
             </div>
           </div>
@@ -201,9 +215,17 @@ function openUrl(url: string) {
               rounded="lg"
               class="flex-1"
               :prepend-icon="copiedKey === 'redotpay' ? mdiCheck : mdiContentCopy"
-              @click="copyText('@arafath_rahman9', 'redotpay')"
+              @click="copyText('1965421414', 'redotpay')"
             >
-              {{ copiedKey === 'redotpay' ? $t('Copied!') : $t('Copy RedotPay ID') }}
+              {{ copiedKey === 'redotpay' ? $t('ID Copied!') : $t('Copy ID') }}
+            </v-btn>
+            <v-btn
+              variant="tonal"
+              rounded="lg"
+              :prepend-icon="copiedKey === 'redotpay-email' ? mdiCheck : mdiContentCopy"
+              @click="copyText('arafathrahman710@gmail.com', 'redotpay-email')"
+            >
+              {{ copiedKey === 'redotpay-email' ? $t('Email Copied!') : $t('Copy Email') }}
             </v-btn>
           </div>
         </v-card>
