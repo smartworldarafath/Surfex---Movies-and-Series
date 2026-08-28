@@ -83,7 +83,7 @@ watch([loaded, () => settings.themeFromArt], ([art, on]) => {
       <div
         v-if="shown"
         :key="shown"
-        class="ventic-backdrop absolute h-[130%] w-[130%] bg-cover bg-top -left-[15%] -top-[15%]"
+        class="surfex-backdrop absolute h-[130%] w-[130%] bg-cover bg-top -left-[15%] -top-[15%]"
         :style="{ backgroundImage: `url(${shown})`, filter: `blur(${ui.blur}px) brightness(0.5) saturate(1.25)` }"
       />
     </transition>

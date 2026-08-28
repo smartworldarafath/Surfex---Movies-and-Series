@@ -71,7 +71,7 @@ assert.notEqual(one, rememberAudio(one, 'tv:1396', { normalize: 'off', dialogue:
 
 // --- The Android seam -----------------------------------------------------
 const kotlin = readFileSync(
-  new URL('../src-tauri/gen/android/app/src/main/java/com/ventic/app/Player.kt', import.meta.url),
+  new URL('../src-tauri/gen/android/app/src/main/java/com/surfex/app/Player.kt', import.meta.url),
   'utf8',
 )
 
@@ -87,7 +87,7 @@ for (const level of ['light', 'medium', 'strong'])
 // These are not mpv properties, so they only ever arrive at Kotlin by being
 // forwarded verbatim by the shim. That is the whole path, tested end to end.
 const seen: string[] = []
-;(globalThis as any).VenticPlayer = {
+;(globalThis as any).SurfexPlayer = {
   command: (json: string) => {
     seen.push(json)
     return 'null'

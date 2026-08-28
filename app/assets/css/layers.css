@@ -168,7 +168,7 @@
     backdrop-filter: none;
   }
 
-  html.reduce-effects .ventic-backdrop {
+  html.reduce-effects .surfex-backdrop {
     filter: brightness(0.5) saturate(1.25) !important;
   }
 
@@ -177,7 +177,7 @@
      compositor re-blurs 1664x936 of it every frame the page scrolls. Promoting
      it caches the blurred result — worth more than turning the blur off, and it
      keeps the design. */
-  .ventic-backdrop {
+  .surfex-backdrop {
     will-change: transform;
   }
 

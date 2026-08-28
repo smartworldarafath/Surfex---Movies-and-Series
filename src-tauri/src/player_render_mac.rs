@@ -13,7 +13,7 @@
 //   - The view goes *under* the WKWebView, not over it, which is the one place
 //     this backend is unlike X11 and Win32 and exactly like Android's
 //     SurfaceView. WebKit's own layer is switched to non-opaque so the page can
-//     be see-through down to the video box (`html.ventic-video` in
+//     be see-through down to the video box (`html.surfex-video` in
 //     MpvPlayer.vue), and the controls are then ordinary DOM on top. No shaped
 //     window, no cutouts, no clicks to forward: the webview is in front and
 //     gets them all.

@@ -32,7 +32,7 @@ const COUNTRIES = new Intl.DisplayNames(['en'], { type: 'region' })
  * the name below.
  */
 export const ESPERANTO = {
-  prefix: 'ventic',
+  prefix: 'surfex',
   icons: {
     esperanto: {
       width: 36,

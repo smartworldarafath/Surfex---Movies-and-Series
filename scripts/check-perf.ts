@@ -90,10 +90,10 @@ assert.doesNotMatch(
 
 // The blurred art never moves, but it sits behind a scrolling page — without its
 // own compositor layer the blur is redone every frame.
-assert.match(background, /ventic-backdrop/, 'the backdrop art needs the class the CSS promotes')
+assert.match(background, /surfex-backdrop/, 'the backdrop art needs the class the CSS promotes')
 assert.match(
   layers,
-  /\.ventic-backdrop\s*\{[^}]*will-change:\s*transform/,
+  /\.surfex-backdrop\s*\{[^}]*will-change:\s*transform/,
   'the backdrop art must be promoted to its own layer so its blur is cached',
 )
 
@@ -102,7 +102,7 @@ assert.match(
 for (const [what, re] of [
   ['transitions', /html\.reduce-effects \*[\s\S]{0,200}?transition:\s*none\s*!important/],
   ['the frosted chrome', /html\.reduce-effects[\s\S]{0,400}?backdrop-filter:\s*none/],
-  ['the backdrop blur', /html\.reduce-effects \.ventic-backdrop\s*\{[^}]*filter:/],
+  ['the backdrop blur', /html\.reduce-effects \.surfex-backdrop\s*\{[^}]*filter:/],
 ] as const)
   assert.match(layers, re, `reduce-effects must drop ${what}`)
 
@@ -119,7 +119,7 @@ assert.doesNotMatch(
 // poster art washing the text out, which is a legibility bug, not a slow frame.
 assert.match(
   layers,
-  /html\.reduce-effects \.ventic-backdrop\s*\{[^}]*brightness\([^)]*\)[^}]*saturate\(/,
+  /html\.reduce-effects \.surfex-backdrop\s*\{[^}]*brightness\([^)]*\)[^}]*saturate\(/,
   'dropping the backdrop blur must keep its brightness/saturation',
 )
 
@@ -147,8 +147,8 @@ assert.match(row, /useResizeObserver\(\[scroller, track\], measure\)/, 'the arro
 
 // --- Wiring: a setting nothing reads is a setting that does nothing ---
 
-assert.match(settings, /reduceEffects = useLocalStorage\('ventic\.reduceEffects'/, 'the setting is stored')
-assert.match(settings, /'ventic\.reduceEffects', isTv\(\) \?\? false/, 'a television gets it on by default')
+assert.match(settings, /reduceEffects = useLocalStorage\('surfex\.reduceEffects'/, 'the setting is stored')
+assert.match(settings, /'surfex\.reduceEffects', isTv\(\) \?\? false/, 'a television gets it on by default')
 assert.match(settings, /return \{[^}]*reduceEffects/, 'the store must expose it')
 assert.match(
   app,

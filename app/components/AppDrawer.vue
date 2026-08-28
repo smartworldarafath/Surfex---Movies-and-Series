@@ -56,8 +56,8 @@ const library = computed(() => [
     class="panel border-none"
   >
     <nuxt-link :to="localePath('/')" class="flex items-center gap-3 px-4 py-5">
-      <img src="/logo.svg" alt="Surfex" class="size-26px shrink-0">
-      <span v-if="!rail" class="text-title-large whitespace-nowrap font-bold">Surfex</span>
+      <img src="/logo.png" alt="Surfex" class="size-8 shrink-0 rounded-lg shadow-sm">
+      <span v-if="!rail" class="text-title-large whitespace-nowrap font-bold tracking-wide">Surfex</span>
     </nuxt-link>
 
     <v-list nav density="comfortable" class="px-2">

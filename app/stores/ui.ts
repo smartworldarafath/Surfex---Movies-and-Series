@@ -44,7 +44,7 @@ export const useUiStore = defineStore('ui', () => {
   const drawer = ref(false)
 
   /**
-   * A source URL that arrived on a `ventic://` link and is waiting to be
+   * A source URL that arrived on a `surfex://` link and is waiting to be
    * confirmed. Deliberately not persisted and never added on its own: a link
    * from a web page may not silently change what the app searches.
    */

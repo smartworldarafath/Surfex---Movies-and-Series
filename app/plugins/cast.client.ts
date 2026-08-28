@@ -1,6 +1,6 @@
 /**
  * The receiving half of casting: this device answering "play this" from another
- * Ventic on the same network.
+ * Surfex on the same network.
  *
  * The command carries a URL and nothing else of consequence (see utils/cast),
  * so acting on one is a navigation — the player is driven entirely by its route,
@@ -41,7 +41,7 @@ export default defineNuxtPlugin(() => {
       if (!settings.castCode)
         settings.castCode = newCode()
       if (!settings.castName)
-        settings.castName = isTv() ? $t('Ventic TV') : $t('Ventic')
+        settings.castName = isTv() ? $t('Surfex TV') : $t('Surfex')
     }
 
     const wanted = [settings.castReceive, settings.castName, settings.castCode].join('|')
@@ -55,7 +55,7 @@ export default defineNuxtPlugin(() => {
     catch (e) {
       // A port already taken is the realistic failure, and the switch being on
       // while nothing answers is worth saying out loud rather than hiding.
-      console.error('[ventic] casting to this device could not be turned on', e)
+      console.error('[surfex] casting to this device could not be turned on', e)
       applied = ''
       settings.castReceive = false
     }

@@ -10,21 +10,21 @@
  * Pure functions over a storage-shaped object, so `bun run check:library`
  * exercises them without a browser; the file dialogs live in settings/Account.vue.
  *
- * Every `ventic.` key, verbatim, rather than a schema per store. A
+ * Every `surfex.` key, verbatim, rather than a schema per store. A
  * preference added tomorrow is in the backup the day it is written, and a key
  * that stops existing is simply never read again. The day two builds disagree
  * about what a key *means*, `version` is what a migration hangs off.
  */
 
 const PREFIX = 'surfex.'
-const LEGACY_PREFIX = 'ventic.'
+const LEGACY_PREFIX = 'surfex.'
 
 /**
  * Ours, but never written to a file. A backup is meant to be copied onto a USB
  * stick and mailed to yourself; a token in one is a credential you can't take
  * back once the file has been anywhere. Any key holding one goes here.
  *
- * `surfex.trakt` / `ventic.trakt` held an OAuth token in versions that had a Trakt sign-in. The
+ * `surfex.trakt` / `surfex.trakt` held an OAuth token in versions that had a Trakt sign-in. The
  * sync is gone but the key is still sitting in those installs' storage, so it
  * stays on this list rather than starting to land in backup files.
  */
@@ -34,7 +34,7 @@ const SECRET = new Set([
 ])
 
 export interface Backup {
-  app: 'surfex' | 'ventic'
+  app: 'surfex' | 'surfex'
   /** The layout of this file, not the app's version. */
   version: 1
   /** Written at, ms since epoch — the only way to tell two backups apart. */
@@ -77,7 +77,7 @@ export function readBackup(text: string): Backup {
   }
 
   const b = raw as Partial<Backup> | null
-  if (!b || typeof b !== 'object' || (b.app !== 'surfex' && b.app !== 'ventic') || !b.keys || typeof b.keys !== 'object')
+  if (!b || typeof b !== 'object' || (b.app !== 'surfex' && b.app !== 'surfex') || !b.keys || typeof b.keys !== 'object')
     return fail($t('That isn\'t a Surfex backup.'))
   if (b.version !== 1)
     return fail($t('That backup is in format {version}, which this build doesn\'t know how to read.', { version: b.version }))

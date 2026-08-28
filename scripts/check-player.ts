@@ -200,7 +200,7 @@ const bridge = {
   status: () => JSON.stringify({ running: true, log_tail: null }),
   codecs: () => JSON.stringify(['audio/eac3', 'video/hevc']),
 }
-;(globalThis as any).VenticPlayer = bridge
+;(globalThis as any).SurfexPlayer = bridge
 
 const exo = exoEngine()!
 assert.ok(exo, 'the bridge being there is what decides, not the platform')

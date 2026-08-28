@@ -3,7 +3,7 @@ import { mdiDeleteOutline, mdiInformationOutline, mdiPlus, mdiPowerPlugOutline, 
 import { invoke } from '@tauri-apps/api/core'
 
 /**
- * Where the app is allowed to look for something to play. Ventic ships with
+ * Where the app is allowed to look for something to play. Surfex ships with
  * this list empty and never adds to it on its own: a source is a server
  * someone else runs, and adding one is the user's decision to make.
  */
@@ -78,7 +78,7 @@ function removePlaylist(value: string) {
 
 // --- Deep links ---------------------------------------------------------------
 
-/** A `ventic://` link staged by plugins/deeplink.client.ts, awaiting a yes. */
+/** A `surfex://` link staged by plugins/deeplink.client.ts, awaiting a yes. */
 const pending = computed(() => ui.pendingSource)
 
 function confirmPending() {
@@ -124,7 +124,7 @@ async function toggleStremio(on: boolean | null) {
   <div class="flex flex-col gap-8">
     <settings-section
       :title="$t('Sources')"
-      :hint="$t('Ventic searches nothing by itself. A source is a URL you add here, pointing at a server that answers with things to play. What a source offers, and whether you have the right to play it, is between you and whoever runs it.')"
+      :hint="$t('Surfex searches nothing by itself. A source is a URL you add here, pointing at a server that answers with things to play. What a source offers, and whether you have the right to play it, is between you and whoever runs it.')"
     >
       <!-- Naming the protocol is what makes the empty box answerable: a user who
            knows the word can find an addon in one search. Naming a particular
@@ -135,7 +135,7 @@ async function toggleStremio(on: boolean | null) {
         </template>
         <!-- i18n-t rather than $t: the sentence has markup inside it, and the
              two <code> spans are literal syntax a translator must not touch. -->
-        <i18n-t keypath="Ventic speaks the {protocol}. Any Stremio addon URL works here — paste the {link} link or the {manifest} address and it'll be trimmed to what's needed." tag="span">
+        <i18n-t keypath="Surfex speaks the {protocol}. Any Stremio addon URL works here — paste the {link} link or the {manifest} address and it'll be trimmed to what's needed." tag="span">
           <template #protocol>
             <strong>{{ $t('Stremio addon protocol') }}</strong>
           </template>
@@ -187,7 +187,7 @@ async function toggleStremio(on: boolean | null) {
 
     <settings-section
       :title="$t('Preferred quality')"
-      :hint="$t('Which copy to reach for when Ventic picks one for you. It is a preference and not a filter: a tier with nothing worth streaming in it falls through to the next, so asking for 4K on a title that has none still plays the best 1080p.')"
+      :hint="$t('Which copy to reach for when Surfex picks one for you. It is a preference and not a filter: a tier with nothing worth streaming in it falls through to the next, so asking for 4K on a title that has none still plays the best 1080p.')"
     >
       <settings-segment v-model="settings.quality" :options="QUALITIES" />
       <p class="text-body-small opacity-70">
@@ -245,7 +245,7 @@ async function toggleStremio(on: boolean | null) {
 
     <settings-section
       :title="$t('Adding by link')"
-      :hint="$t('A page can offer a ventic:// link that opens the app with a source ready to add. The app always asks first — a link can never change what Ventic searches on its own.')"
+      :hint="$t('A page can offer a surfex:// link that opens the app with a source ready to add. The app always asks first — a link can never change what Surfex searches on its own.')"
     >
       <v-switch
         v-model="stremioLinks"
@@ -257,7 +257,7 @@ async function toggleStremio(on: boolean | null) {
         @update:model-value="toggleStremio"
       />
       <p class="text-body-small opacity-70">
-        <i18n-t keypath="Addon pages publish {link} install links. Turning this on points them at Ventic. Leave it off if you also use Stremio — only one app can own the scheme, and this would take it." tag="span">
+        <i18n-t keypath="Addon pages publish {link} install links. Turning this on points them at Surfex. Leave it off if you also use Stremio — only one app can own the scheme, and this would take it." tag="span">
           <template #link>
             <code>stremio://</code>
           </template>
@@ -273,11 +273,11 @@ async function toggleStremio(on: boolean | null) {
         </v-card-title>
         <v-card-text class="flex flex-col gap-3">
           <p class="text-body-medium">
-            {{ $t('A link asked Ventic to start searching:') }}
+            {{ $t('A link asked Surfex to start searching:') }}
           </p>
           <code class="break-all rounded-lg bg-surface-container-high px-3 py-2 text-body-small">{{ pending }}</code>
           <p class="text-body-small opacity-70">
-            {{ $t('Ventic will send it the title you\'re looking for and play what it hands back. Only add servers you trust — this one is not run by, or checked by, this app.') }}
+            {{ $t('Surfex will send it the title you\'re looking for and play what it hands back. Only add servers you trust — this one is not run by, or checked by, this app.') }}
           </p>
         </v-card-text>
         <v-card-actions>
@@ -294,10 +294,10 @@ async function toggleStremio(on: boolean | null) {
 
     <settings-section
       :title="$t('What a source has to speak')"
-      :hint="$t('Any server implementing the Stremio addon protocol works — it is an open protocol with several independent implementations, and Ventic runs no code from a source, only reads its answer.')"
+      :hint="$t('Any server implementing the Stremio addon protocol works — it is an open protocol with several independent implementations, and Surfex runs no code from a source, only reads its answer.')"
     >
       <p class="text-body-small opacity-70">
-        <i18n-t keypath="Ventic asks a source for {movie}, or {series}, and expects a {streams} array back. Add several and their results are merged, with duplicates dropped and earlier sources preferred." tag="span">
+        <i18n-t keypath="Surfex asks a source for {movie}, or {series}, and expects a {streams} array back. Add several and their results are merged, with duplicates dropped and earlier sources preferred." tag="span">
           <template #movie>
             <code>/stream/movie/&lt;imdb-id&gt;.json</code>
           </template>

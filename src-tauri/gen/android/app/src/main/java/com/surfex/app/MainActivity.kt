@@ -128,10 +128,10 @@ class MainActivity : TauriActivity() {
     }
 
     webView.addJavascriptInterface(Screen(), "SurfexScreen")
-    webView.addJavascriptInterface(Screen(), "VenticScreen")
+    webView.addJavascriptInterface(Screen(), "SurfexScreen")
     player = SurfexPlayer(this).also {
       webView.addJavascriptInterface(it, "SurfexPlayer")
-      webView.addJavascriptInterface(it, "VenticPlayer")
+      webView.addJavascriptInterface(it, "SurfexPlayer")
     }
   }
 

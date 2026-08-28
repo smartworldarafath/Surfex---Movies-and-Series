@@ -3,11 +3,11 @@ import { isTauri } from '@tauri-apps/api/core'
 /**
  * Where the last painted background colour is left for the next launch.
  *
- * A `ventic.` key, so app/utils/backup.ts carries it like any other preference —
+ * A `surfex.` key, so app/utils/backup.ts carries it like any other preference —
  * which is right: restoring a backup restores the theme, and the ground is that
  * theme's own colour.
  */
-const KEY = 'ventic.ground'
+const KEY = 'surfex.ground'
 
 /**
  * Tell every layer under the app what colour the app is.

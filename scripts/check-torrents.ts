@@ -196,7 +196,7 @@ assert.equal(pickBest(parsed)!.hash, 'bbb', 'and the streaming default comes bac
 // what it actually has, and a TV box with Dolby and HEVC keeps the release a
 // phone would have been steered off. Left installed on purpose: nothing below
 // asks about codecs, and `deviceCodecs` caches for the life of the process.
-;(globalThis as any).VenticPlayer = { codecs: () => JSON.stringify(['audio/eac3', 'video/hevc']) }
+;(globalThis as any).SurfexPlayer = { codecs: () => JSON.stringify(['audio/eac3', 'video/hevc']) }
 assert.ok(!isAwkward(codecs[0]!), 'a decoder it has is not a codec to avoid')
 assert.equal(pickBest(codecs, undefined, true)!.hash, 'h265', 'so it stops taking the x264 copy')
 
@@ -437,8 +437,8 @@ assert.equal(normalizeSource('https://a.example/manifest.json'), 'https://a.exam
 assert.equal(normalizeSource('stremio://a.example/manifest.json'), 'https://a.example')
 assert.equal(normalizeSource('STREMIO://a.example/Manifest.JSON'), 'https://a.example')
 // The deep link the app registers for, which arrives in the same shape.
-assert.equal(normalizeSource('ventic://a.example/manifest.json'), 'https://a.example')
-assert.equal(normalizeSource('ventic://a.example/opt=x,y/manifest.json'), 'https://a.example/opt=x,y')
+assert.equal(normalizeSource('surfex://a.example/manifest.json'), 'https://a.example')
+assert.equal(normalizeSource('surfex://a.example/opt=x,y/manifest.json'), 'https://a.example/opt=x,y')
 // A configured addon keeps its settings in the path — dropping them would
 // silently hand back someone else's defaults.
 assert.equal(normalizeSource('https://a.example/opt=x,y/manifest.json'), 'https://a.example/opt=x,y')
@@ -463,7 +463,7 @@ assert.equal(normalizeSource('https://'), '')
 const schemes: string[] = JSON.parse(
   await Bun.file('src-tauri/tauri.conf.json').text(),
 ).plugins['deep-link'].desktop.schemes
-for (const scheme of ['ventic', 'stremio'])
+for (const scheme of ['surfex', 'stremio'])
   assert.ok(schemes.includes(scheme), `deep-link config must accept ${scheme}://`)
 
 const realFetch = globalThis.fetch

@@ -179,7 +179,7 @@ async function download(t: Release) {
           <div v-if="!configured" class="flex flex-col items-center gap-3 py-10 text-center">
             <v-icon :icon="mdiPowerPlugOutline" size="36" class="opacity-40" />
             <span class="max-w-md text-body-medium opacity-70">
-              {{ $t('Ventic has no sources configured, so there is nowhere to search. You can still play a magnet or a torrent file you open yourself.') }}
+              {{ $t('Surfex has no sources configured, so there is nowhere to search. You can still play a magnet or a torrent file you open yourself.') }}
             </span>
             <v-btn variant="tonal" size="small" :to="localePath('/settings/sources')">
               {{ $t('Open source settings') }}

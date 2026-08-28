@@ -1,5 +1,5 @@
 /**
- * Casting — putting what this device is playing on another Ventic on the same
+ * Casting — putting what this device is playing on another Surfex on the same
  * network.
  *
  * The thing that travels is a **URL**, never a torrent, so the receiving device
@@ -15,7 +15,7 @@
  *
  * Nothing here leaves the local network and there is no server in the middle,
  * which is the same answer the library gives to syncing. Devices are found by
- * asking every address on this subnet whether it is a Ventic; acting on what
+ * asking every address on this subnet whether it is a Surfex; acting on what
  * one says needs the pairing code shown on its own screen.
  */
 import { invoke } from '@tauri-apps/api/core'
@@ -32,7 +32,7 @@ export const CAST_PORT = 3232
  */
 export const MIRROR_PORT = 3231
 
-/** A Ventic that answered a probe. */
+/** A Surfex that answered a probe. */
 export interface CastDevice {
   /** What it calls itself, as the other device's settings screen named it. */
   name: string
@@ -132,10 +132,10 @@ export function castRoute(play: CastPlay): Record<string, string> {
 // Through tauri-plugin-http, not the webview's fetch: another device on the LAN
 // sends no `Access-Control-Allow-Origin` either (see utils/iptv.ts).
 
-/** Is there a Ventic at this address? Its name if so, null for anything else. */
+/** Is there a Surfex at this address? Its name if so, null for anything else. */
 export async function probeDevice(address: string, timeout = 700): Promise<CastDevice | null> {
   try {
-    const res = await tauriFetch(`http://${address}:${CAST_PORT}/ventic`, {
+    const res = await tauriFetch(`http://${address}:${CAST_PORT}/surfex`, {
       connectTimeout: timeout,
       signal: AbortSignal.timeout(timeout),
     })
@@ -145,7 +145,7 @@ export async function probeDevice(address: string, timeout = 700): Promise<CastD
     // Anything at all can be listening on a port, and a printer that answers
     // with 200 and a page of HTML is not something to offer as a television.
     const body = await res.json() as { app?: string, name?: string }
-    return body?.app === 'ventic' ? { address, name: body.name || address } : null
+    return body?.app === 'surfex' ? { address, name: body.name || address } : null
   }
   catch {
     return null
@@ -153,7 +153,7 @@ export async function probeDevice(address: string, timeout = 700): Promise<CastD
 }
 
 /**
- * Ask every address on the subnet, reporting each Ventic as it answers rather
+ * Ask every address on the subnet, reporting each Surfex as it answers rather
  * than at the end — the first one usually replies in well under a second, and a
  * list that fills in is the difference between "searching" and "broken".
  */
@@ -197,7 +197,7 @@ export interface CastProblem {
 /** Null when the other device took it, otherwise why it didn't. */
 export async function sendPlay(device: CastDevice, code: string, play: CastPlay): Promise<CastProblem | null> {
   try {
-    const res = await tauriFetch(`http://${device.address}:${CAST_PORT}/ventic/play`, {
+    const res = await tauriFetch(`http://${device.address}:${CAST_PORT}/surfex/play`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ ...play, code }),
@@ -233,7 +233,7 @@ export async function sendPlay(device: CastDevice, code: string, play: CastPlay)
 /** Take it back: tell the other device to leave the player. */
 export async function sendStop(device: CastDevice, code: string): Promise<CastProblem | null> {
   try {
-    const res = await tauriFetch(`http://${device.address}:${CAST_PORT}/ventic/stop`, {
+    const res = await tauriFetch(`http://${device.address}:${CAST_PORT}/surfex/stop`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ code }),

@@ -1,5 +1,5 @@
-<!-- The same background upside down, for Ventic Light: the darker tone-45 red
-     the light theme uses, on its off-white paper. See ventic-dark.svg. -->
+<!-- The same background upside down, for Surfex Light: the darker tone-45 red
+     the light theme uses, on its off-white paper. See surfex-dark.svg. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
   <defs>
     <radialGradient id="red" cx="0.18" cy="0.82" r="0.8">

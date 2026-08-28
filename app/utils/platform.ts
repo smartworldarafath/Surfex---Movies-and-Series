@@ -7,7 +7,7 @@ import { platform } from '@tauri-apps/plugin-os'
  * Only Android can answer. Chromium never implemented
  * `navigator.connection.type` (`effectiveType` is a speed estimate, `saveData` a
  * user setting), so the bit comes from `ConnectivityManager` through the
- * `VenticScreen` bridge in MainActivity. `null` means nothing here can tell,
+ * `SurfexScreen` bridge in MainActivity. `null` means nothing here can tell,
  * which is every desktop build and `bun run dev` — and the Wi-Fi-only setting
  * stays out of the way there rather than guessing.
  */
@@ -21,7 +21,7 @@ export function meteredNetwork(): boolean | null {
  * Only Android can say: a TV webview's user agent claims Android like any
  * phone's, and the display gives it away no better — this set reports 960dp
  * wide, which is a small laptop as far as any breakpoint is concerned. It comes
- * from `UiModeManager` through the `VenticScreen` bridge. `null` is every other
+ * from `UiModeManager` through the `SurfexScreen` bridge. `null` is every other
  * build, where "is it a TV" isn't a question worth guessing at.
  */
 export function isTv(): boolean | null {
@@ -122,7 +122,7 @@ export function apkProgress(): ApkInstall {
 /** MainActivity's `Screen`, present only inside the Android app. */
 function bridge() {
   return (globalThis as {
-    VenticScreen?: {
+    SurfexScreen?: {
       metered?: () => boolean
       volumes?: () => string
       tv?: () => boolean
@@ -130,7 +130,7 @@ function bridge() {
       installUpdate?: (url: string) => string
       updateProgress?: () => string
     }
-  }).VenticScreen
+  }).SurfexScreen
 }
 
 /**

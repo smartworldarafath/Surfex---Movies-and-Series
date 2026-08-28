@@ -306,15 +306,15 @@ function fakeStore(seed: Record<string, string> = {}): KeyStore & { data: Record
 }
 
 const live = fakeStore({
-  'ventic.media': JSON.stringify({ 'movie:603': { title: 'The Matrix' }, 'tv:1396': { title: 'Breaking Bad' } }),
-  'ventic.progress': JSON.stringify({ 'movie:603': { position: 10, duration: 100, at: 1, watched: false } }),
-  'ventic.favourites': JSON.stringify({ 'tv:1396': 5 }),
-  'ventic.watchlist': JSON.stringify({ 'movie:603': 6, 'tv:1396': 7 }),
-  'ventic.sources': JSON.stringify(['https://a.example']),
-  'ventic.theme': '"dark"',
+  'surfex.media': JSON.stringify({ 'movie:603': { title: 'The Matrix' }, 'tv:1396': { title: 'Breaking Bad' } }),
+  'surfex.progress': JSON.stringify({ 'movie:603': { position: 10, duration: 100, at: 1, watched: false } }),
+  'surfex.favourites': JSON.stringify({ 'tv:1396': 5 }),
+  'surfex.watchlist': JSON.stringify({ 'movie:603': 6, 'tv:1396': 7 }),
+  'surfex.sources': JSON.stringify(['https://a.example']),
+  'surfex.theme': '"dark"',
   // A credential. A backup is a file you mail to yourself, and one of these
   // can't be taken back out of it — so it stays behind. (SECRET in utils/backup.)
-  'ventic.tmdbKey': 'secret-token',
+  'surfex.tmdbKey': 'secret-token',
   // Somebody else's key in the same origin — never ours to carry or restore.
   'vuetify:dynamic-theme': 'x',
 })
@@ -322,12 +322,12 @@ const live = fakeStore({
 const backup = makeBackup(live, 42)
 assert.equal(backup.at, 42)
 assert.deepEqual(Object.keys(backup.keys).sort(), [
-  'ventic.favourites',
-  'ventic.media',
-  'ventic.progress',
-  'ventic.sources',
-  'ventic.theme',
-  'ventic.watchlist',
+  'surfex.favourites',
+  'surfex.media',
+  'surfex.progress',
+  'surfex.sources',
+  'surfex.theme',
+  'surfex.watchlist',
 ])
 
 const round = readBackup(JSON.stringify(backup))
@@ -336,20 +336,20 @@ assert.deepEqual(backupSummary(round), { titles: 2, watched: 1, favourites: 1, w
 
 // Restoring is assignment, not a merge — but only of what the file names, so a
 // preference this build has and the backup doesn't is left where it is.
-const target = fakeStore({ 'ventic.media': '{}', 'ventic.uiScale': '1.4' })
+const target = fakeStore({ 'surfex.media': '{}', 'surfex.uiScale': '1.4' })
 applyBackup(round, target)
-assert.equal(target.data['ventic.media'], live.data['ventic.media'], 'replaced')
-assert.equal(target.data['ventic.uiScale'], '1.4', 'a key the backup never mentions survives')
+assert.equal(target.data['surfex.media'], live.data['surfex.media'], 'replaced')
+assert.equal(target.data['surfex.uiScale'], '1.4', 'a key the backup never mentions survives')
 
 // A file can come from anywhere, so nothing outside our own prefix is written
 // back however the file asks — this is the whole trust boundary.
 const hostile = readBackup(JSON.stringify({
-  app: 'ventic',
+  app: 'surfex',
   version: 1,
   at: 1,
-  keys: { 'ventic.theme': '"light"', 'token': 'nope', 'vuetify:dynamic-theme': 'nope' },
+  keys: { 'surfex.theme': '"light"', 'token': 'nope', 'vuetify:dynamic-theme': 'nope' },
 }))
-assert.deepEqual(Object.keys(hostile.keys), ['ventic.theme'])
+assert.deepEqual(Object.keys(hostile.keys), ['surfex.theme'])
 
 // --- Placeholder cards ---------------------------------------------------------
 // A title with no snapshot is rendered rather than dropped, and the only useful
@@ -371,8 +371,8 @@ for (const [text, why] of [
   ['{}', 'no app marker'],
   ['null', 'null parses fine and is still not a backup'],
   ['{"app":"something-else","version":1,"keys":{}}', 'another app\'s file'],
-  ['{"app":"ventic","version":9,"keys":{"ventic.theme":"1"}}', 'a format this build cannot read'],
-  ['{"app":"ventic","version":1,"keys":{}}', 'nothing to restore'],
+  ['{"app":"surfex","version":9,"keys":{"surfex.theme":"1"}}', 'a format this build cannot read'],
+  ['{"app":"surfex","version":1,"keys":{}}', 'nothing to restore'],
 ] as const)
   assert.throws(() => readBackup(text), Error, why)
 

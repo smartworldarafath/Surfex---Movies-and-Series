@@ -39,7 +39,7 @@ export function configuredSources() {
 }
 
 /**
- * What a user actually has on the clipboard — or what arrived on a `ventic://`
+ * What a user actually has on the clipboard — or what arrived on a `surfex://`
  * link — turned into a base URL we can append `/stream/…` to. Nobody copies a
  * bare origin: an addon hands out a scheme link or a `…/manifest.json` URL, and
  * a configured one carries its settings in the path
@@ -50,9 +50,9 @@ export function configuredSources() {
  * Returns '' for anything that isn't a URL, so the caller can say so.
  */
 export function normalizeSource(input: string): string {
-  // `ventic://` is our own deep link, `stremio://` is what addon pages
+  // `surfex://` is our own deep link, `stremio://` is what addon pages
   // already publish; both name an https server in the same shape.
-  const typed = input.trim().replace(/^(?:ventic|stremio):\/\//i, 'https://')
+  const typed = input.trim().replace(/^(?:surfex|stremio):\/\//i, 'https://')
 
   // A bare host is what people actually have in front of them, and typing
   // "https://" on a TV keyboard costs eight presses of a d-pad. https is the

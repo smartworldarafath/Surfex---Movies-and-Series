@@ -127,7 +127,7 @@ function code(kotlin: string) {
 }
 
 const activity = code(readFileSync(
-  new URL('../src-tauri/gen/android/app/src/main/java/com/ventic/app/MainActivity.kt', import.meta.url),
+  new URL('../src-tauri/gen/android/app/src/main/java/com/surfex/app/MainActivity.kt', import.meta.url),
   'utf8',
 ))
 const manifest = readFileSync(

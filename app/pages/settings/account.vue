@@ -20,7 +20,7 @@ import { documentDir } from '@tauri-apps/api/path'
  * can't drive, and a backup is a thing you want the latest of. Add a dialog the
  * day someone wants to keep two.
  */
-const FILE = 'ventic-backup.json'
+const FILE = 'surfex-backup.json'
 const DOCUMENTS = useTauriFsBaseDirectory.Document
 
 const library = useLibraryStore()
@@ -105,7 +105,7 @@ function apply() {
   <div class="flex flex-col gap-8">
     <settings-section
       :title="$t('Sync')"
-      :hint="$t('Ventic keeps your library on this device. Carrying it to another screen is the backup file below.')"
+      :hint="$t('Surfex keeps your library on this device. Carrying it to another screen is the backup file below.')"
     >
       <!-- Text only, so nothing here for the d-pad to walk into. -->
       <v-card rounded="xl" class="panel flex flex-col items-start gap-3 p-6">
@@ -170,7 +170,7 @@ function apply() {
               {{ $t('Everything it holds replaces what is on this device: {titles} titles, {watched} watch positions, {favourites} favourites, {watchlist} on the watchlist and {sources} sources. Downloads on the disk are untouched.', summary) }}
             </p>
             <p v-if="summary.sources" class="text-body-small opacity-60">
-              {{ $t('Restoring changes which servers Ventic searches — a backup carries its own source list, and it wins.') }}
+              {{ $t('Restoring changes which servers Surfex searches — a backup carries its own source list, and it wins.') }}
             </p>
             <p v-if="pending?.at" class="text-body-small opacity-60">
               {{ $t('Written {at}.', { at: new Date(pending.at).toLocaleString(uiLocale()) }) }}

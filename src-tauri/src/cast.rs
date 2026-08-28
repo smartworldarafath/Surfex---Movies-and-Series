@@ -124,7 +124,7 @@ pub struct Stop {
 	code: String,
 }
 
-/// What a device answers a probe with. `app` is what tells a Ventic apart from
+/// What a device answers a probe with. `app` is what tells a Surfex apart from
 /// whatever else on the network happens to answer on this port.
 #[derive(Serialize)]
 struct Identity {
@@ -268,9 +268,9 @@ pub async fn cast_receive(app: AppHandle, enable: bool, name: String, code: Stri
 			.route("/surfex", get(identity))
 			.route("/surfex/play", post(play))
 			.route("/surfex/stop", post(stop))
-			.route("/ventic", get(identity))
-			.route("/ventic/play", post(play))
-			.route("/ventic/stop", post(stop))
+			.route("/surfex", get(identity))
+			.route("/surfex/play", post(play))
+			.route("/surfex/stop", post(stop))
 			.with_state(state);
 
 		tokio::select! {

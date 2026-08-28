@@ -300,7 +300,7 @@ useEventListener(window, 'keydown', (e: KeyboardEvent) => {
               {{ $t('Playing on {device}', { device: castTo.name }) }}
             </div>
             <p class="text-body-medium opacity-70">
-              {{ $t('This device is streaming the film to it. Leave Ventic running until you\'re done — closing it stops the stream.') }}
+              {{ $t('This device is streaming the film to it. Leave Surfex running until you\'re done — closing it stops the stream.') }}
             </p>
             <div class="mt-2 flex gap-2">
               <v-btn variant="tonal" :prepend-icon="mdiStop" @click="stopCasting">

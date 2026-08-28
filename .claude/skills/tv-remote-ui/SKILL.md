@@ -5,7 +5,7 @@ description: How this app stays usable from a TV remote (Android TV / Google TV)
 
 # Remote-friendly UI
 
-Ventic runs on desktop **and** on Android TV, where the only input is a d-pad:
+Surfex runs on desktop **and** on Android TV, where the only input is a d-pad:
 **up, down, left, right, OK, back**. No pointer, no hover, no text entry worth
 having. Anything you add has to be reachable and legible with those six keys.
 
@@ -129,7 +129,7 @@ Run `bun run check:dpad` after touching the geometry.
 - `gen/android` is committed, so edits there survive; regenerating the project
   will clobber them, so re-apply the BACK callback and the
   `handleBackNavigation = false` beside it, the **OK forward**
-  (`dispatchKeyEvent` → `window.__tvOk`), the `VenticScreen` JS interface
+  (`dispatchKeyEvent` → `window.__tvOk`), the `SurfexScreen` JS interface
   (fullscreen, orientation, metered network, `tv()`), the **wide viewport**
   settings, `mediaPlaybackRequiresUserGesture = false`, `Downloads.kt` with its
   `onResume`/`onPause`/`onDestroy` hooks, the process kill in `onDestroy`, the

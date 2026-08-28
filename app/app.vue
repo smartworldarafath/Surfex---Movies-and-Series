@@ -137,7 +137,7 @@ useUpdatesStore().check()
 
 // Unlayered, so a user rule beats both Vuetify's components and UnoCSS —
 // otherwise "advanced" would mean "fight the cascade" (see assets/css/layers.css).
-useStyleTag(computed(() => settings.customCss), { id: 'ventic-custom-css' })
+useStyleTag(computed(() => settings.customCss), { id: 'surfex-custom-css' })
 </script>
 
 <template>

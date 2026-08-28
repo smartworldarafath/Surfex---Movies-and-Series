@@ -15,8 +15,8 @@
  *
  * It only takes the screen when nothing mounted. Once Nuxt is up, Nuxt's own
  * error page says more than this could, so errors are only collected onto
- * `window.__venticBoot` — which is also how to read them over adb or devtools,
- * along with `__venticBoot.show()` to raise the panel by hand.
+ * `window.__surfexBoot` — which is also how to read them over adb or devtools,
+ * along with `__surfexBoot.show()` to raise the panel by hand.
  *
  * Two things happen before any of that, because the same blank screen is also
  * what a *slow* start looks like and the reports are identical. It puts the
@@ -29,7 +29,7 @@
  */
 ;(function () {
   // Head tags survive hydration, but a second copy would cost nothing to guard.
-  if (window.__surfexBoot || window.__venticBoot)
+  if (window.__surfexBoot || window.__surfexBoot)
     return
 
   var VERSION = '__VERSION__'
@@ -44,7 +44,7 @@
   /** And how long before we stop being reassuring and start being useful. */
   var PANEL_MS = 12000
 
-  var boot = window.__surfexBoot = window.__venticBoot = {
+  var boot = window.__surfexBoot = window.__surfexBoot = {
     version: VERSION,
     errors: [],
     missing: [],
@@ -57,7 +57,7 @@
    */
   function ground() {
     try {
-      return localStorage.getItem('surfex.ground') || localStorage.getItem('ventic.ground') || GROUND
+      return localStorage.getItem('surfex.ground') || localStorage.getItem('surfex.ground') || GROUND
     }
     catch (e) {
       return GROUND
@@ -138,7 +138,7 @@
   }
 
   function environment() {
-    var bridge = window.SurfexScreen || window.VenticScreen
+    var bridge = window.SurfexScreen || window.SurfexScreen
     return [
       ['Surfex', VERSION],
       ['Webview', chromeVersion() ? 'Chrome ' + chromeVersion() : 'unknown'],

@@ -4,7 +4,7 @@
  * On Linux the player runs whatever mpv and ffmpeg the distro installed.
  * Windows ships neither and has no package manager to lean on, so the app
  * carries its own: `tauri.windows.conf.json` declares them as resources, which
- * puts them next to Ventic.exe in the installer, and `player_windows.rs` and
+ * puts them next to Surfex.exe in the installer, and `player_windows.rs` and
  * `lib.rs` resolve them from there. This module is what makes those files exist.
  *
  * They are community builds (the same ones mpv.io points at) — mpv itself
@@ -102,11 +102,11 @@ const LICENCE = join(DEST_DIR, 'LICENSE.txt')
  */
 function notice(release: Release) {
   const commit = release.tag.split('-').pop()
-  return `Ventic bundles mpv to play video on Windows, and ffmpeg to read the
+  return `Surfex bundles mpv to play video on Windows, and ffmpeg to read the
 audio and the frames of what it is playing.
 
 Both are free software licensed under the GNU General Public License, version 2
-or later, reproduced in full below. Ventic's own code is MIT licensed and is a
+or later, reproduced in full below. Surfex's own code is MIT licensed and is a
 separate work: it launches each of them as a child process and talks to them
 over an IPC socket or a pipe rather than linking against either.
 
@@ -122,12 +122,12 @@ and others — each under its own terms; the build recipe at the URL above
 enumerates them and is the corresponding source for the combined work.
 
 WRITTEN OFFER
-    For three years from the date you received this binary, the Ventic project
+    For three years from the date you received this binary, the Surfex project
     will give any third party a complete machine-readable copy of the
     corresponding source code for the GPL-licensed parts of it, on a medium
     customarily used for software interchange, for no more than the cost of
     performing the distribution. Request one at
-    https://github.com/ventic/desktop/issues.
+    https://github.com/surfex/desktop/issues.
 
 ----------------------------------------------------------------------------
 

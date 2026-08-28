@@ -86,7 +86,7 @@ function updaterSigning(): { env: Record<string, string>, args: string[] } {
   if (process.env.TAURI_SIGNING_PRIVATE_KEY)
     return { env: {}, args: [] }
 
-  const key = join(homedir(), '.tauri', 'ventic.key')
+  const key = join(homedir(), '.tauri', 'surfex.key')
   if (existsSync(key)) {
     console.log(`✓ Signing updates with ${key}\n`)
     return {
@@ -299,7 +299,7 @@ async function buildWindows(extra: string[]) {
   )
 
   const out = `src-tauri/target/${WIN_TARGET}/release/`
-  console.log(`\n✓ ${out}ventic.exe — copy it over together with the mpv/ folder beside it.\n`)
+  console.log(`\n✓ ${out}surfex.exe — copy it over together with the mpv/ folder beside it.\n`)
   if (nsis)
     console.log(`✓ ${out}bundle/nsis/ — the installer, named for the version in tauri.conf.json\n`)
   else

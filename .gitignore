@@ -19,7 +19,7 @@ src-tauri/dylibs
 .claude/settings.local.json
 
 # The APK signing key. It lives in a GitHub secret (see .github/workflows/release.yml);
-# a copy landing here would hand anyone the ability to publish an upgrade to Ventic.
+# a copy landing here would hand anyone the ability to publish an upgrade to Surfex.
 *.jks
 *.keystore
 

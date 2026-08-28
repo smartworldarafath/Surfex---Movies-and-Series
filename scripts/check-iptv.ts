@@ -84,7 +84,7 @@ assert.ok(!playlistName(xtream).includes('hunter2'))
 assert.match(
   read('app/utils/backup.ts'),
   /SECRET = new Set\(\[[^\]]*\$\{PREFIX\}playlists/,
-  'ventic.playlists holds a password and must be in backup.ts\'s SECRET set',
+  'surfex.playlists holds a password and must be in backup.ts\'s SECRET set',
 )
 
 // --- Favourites are filed by name, never by URL --------------------------------
@@ -96,7 +96,7 @@ assert.equal(channelKey('  ESPN HD  '), channelKey('espn hd'))
 assert.ok(!channelKey('ESPN').includes('/'))
 assert.match(
   read('app/stores/library.ts'),
-  /ventic\.liveFavourites/,
+  /surfex\.liveFavourites/,
   'channel favourites need their own map — everything else there is keyed by titleKey',
 )
 

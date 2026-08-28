@@ -82,7 +82,7 @@ const assets = (JSON.parse(gh(['release', 'view', tag, '--json', 'assets'])) as 
 if (!assets.includes('latest.json'))
   skip('the release carries none, so this build was not signed')
 
-const dir = mkdtempSync(join(tmpdir(), 'ventic-updater-'))
+const dir = mkdtempSync(join(tmpdir(), 'surfex-updater-'))
 // A few kilobytes. The AppImage it describes is never fetched.
 gh(['release', 'download', tag, '--dir', dir, '--pattern', 'latest.json'])
 

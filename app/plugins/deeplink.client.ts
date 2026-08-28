@@ -1,5 +1,5 @@
 /**
- * `ventic://…` links, so adding a source is a click on a page rather than a URL
+ * `surfex://…` links, so adding a source is a click on a page rather than a URL
  * typed into a settings field from memory.
  *
  * A link never adds anything by itself. It stages the URL and opens the sources

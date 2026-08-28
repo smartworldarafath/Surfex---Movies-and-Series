@@ -83,7 +83,7 @@ assert.equal(bare.t, undefined, 'under a second is the start of the film, not a 
 // --- Seams no compiler sees ---------------------------------------------------
 
 const rust = read('src-tauri/src/cast.rs')
-const kotlin = read('src-tauri/gen/android/app/src/main/java/com/ventic/app/Downloads.kt')
+const kotlin = read('src-tauri/gen/android/app/src/main/java/com/surfex/app/Downloads.kt')
 const backup = read('app/utils/backup.ts')
 const settings = read('app/stores/settings.ts')
 const watch = read('app/pages/watch.vue')
@@ -156,12 +156,12 @@ assert.ok(!mirrored('/home/someone/a.mkv'), 'not a URL at all')
 // A pairing code that travelled in a backup would be a code its reader can cast
 // with, and the remembered target carries one too.
 for (const key of ['castCode', 'castTarget'])
-  assert.ok(new RegExp(`SECRET[^\\n]*${key}`).test(backup), `ventic.${key} must be in backup.ts's SECRET set`)
+  assert.ok(new RegExp(`SECRET[^\\n]*${key}`).test(backup), `surfex.${key} must be in backup.ts's SECRET set`)
 
 // Off unless asked for: it opens a port, and a television anyone on the Wi-Fi
 // can interrupt is not one anybody wants.
 assert.ok(
-  /useLocalStorage\('ventic\.castReceive', false\)/.test(settings),
+  /useLocalStorage\('surfex\.castReceive', false\)/.test(settings),
   'casting to a device is opt-in',
 )
 
@@ -171,8 +171,8 @@ assert.ok(
 // `pick` read `undefined` off it, and the dialog threw while rendering
 // `!address.trim()`. Casting worked once per install and never again.
 assert.ok(
-  /castTarget = useLocalStorage<[^>]*>\(\s*'ventic\.castTarget',\s*null,\s*\{ serializer: StorageSerializers\.object \},/.test(settings),
-  'ventic.castTarget must name its serializer — a null default makes VueUse store the device as "[object Object]"',
+  /castTarget = useLocalStorage<[^>]*>\(\s*'surfex\.castTarget',\s*null,\s*\{ serializer: StorageSerializers\.object \},/.test(settings),
+  'surfex.castTarget must name its serializer — a null default makes VueUse store the device as "[object Object]"',
 )
 
 // The torrent the other device is reading from must not be paused on the way
@@ -185,7 +185,7 @@ assert.ok(
 // Stop has to reach the other device. Without the route and the listener, the
 // film carries on there until the mirror it was reading from goes down, and
 // then reads as the network failing rather than as the Stop that was pressed.
-assert.ok(/\.route\("\/ventic\/stop", post\(stop\)\)/.test(rust), 'the receiver must answer a stop command')
+assert.ok(/\.route\("\/surfex\/stop", post\(stop\)\)/.test(rust), 'the receiver must answer a stop command')
 assert.ok(/cast:\/\/stop/.test(rust), 'stop is emitted to the page')
 assert.ok(
   /listen\('cast:\/\/stop'/.test(read('app/plugins/cast.client.ts')),

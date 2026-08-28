@@ -30,7 +30,7 @@ function open(url: string) {
   <div class="flex flex-col gap-8">
     <settings-section title="Surfex">
       <div class="flex items-center gap-4">
-        <img src="/logo.svg" alt="" class="size-14">
+        <img src="/logo.png" alt="Surfex" class="size-16 rounded-2xl shadow-md">
         <div>
           <div class="text-title-medium font-bold">
             {{ $t('Version {version}', { version: updates.current || '0.1.0' }) }}

@@ -7,7 +7,7 @@ const ui = useUiStore()
 /**
  * The picture goes into localStorage, so it is re-encoded on the way in: a
  * phone photo is several megabytes before base64 adds a third, against a budget
- * of about five for every `ventic.` key put together. 1920 wide is far more
+ * of about five for every `surfex.` key put together. 1920 wide is far more
  * than a backdrop under 28px of blur can show.
  */
 const picker = ref<HTMLInputElement | null>(null)

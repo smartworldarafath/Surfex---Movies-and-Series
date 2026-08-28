@@ -102,13 +102,13 @@ keeps glued to a box in the page. Targets desktop **and Android TV**.
   playing, which is what the retry in `applyAudio` is for. It is also two
   settings in two places: *Settings → Audio* is the default every film starts
   from, and the player's own Audio panel writes a `titleKey` entry in
-  `ventic.audioByTitle` for the one film in twenty whose dialogue is inaudible —
+  `surfex.audioByTitle` for the one film in twenty whose dialogue is inaudible —
   put back to the default, the entry is dropped again, so a later change to the
   default still reaches every film that never argued. `bun run check:audio`
   holds the chain, that fallback and the Kotlin seam.
 - Playback starts through `downloads.start(key, …)`, never `startTorrent`
   directly: the store files the info hash under the title's progress key
-  (`ventic.cached`), and that map is what lets an already-downloaded film play
+  (`surfex.cached`), and that map is what lets an already-downloaded film play
   with no TMDB lookup, no source search and no peers. Call the util straight and
   the title silently loses its offline copy.
 - Logic worth trusting has a `bun run check:*` script beside it
@@ -181,7 +181,7 @@ keeps glued to a box in the page. Targets desktop **and Android TV**.
   store, not in Kotlin: `planNetwork` pauses background torrents and starts back
   exactly the ones it paused, never one the user paused, and never the film being
   watched. Whether the network is metered can only come from Android
-  (`navigator.connection` can't tell) — `metered()` on the `VenticScreen` bridge,
+  (`navigator.connection` can't tell) — `metered()` on the `SurfexScreen` bridge,
   so `meteredNetwork()` is `null` everywhere else and the setting hides itself.
   Nothing resumes while the app is closed: with no download running there is no
   foreground service, so the process is frozen.
@@ -192,7 +192,7 @@ keeps glued to a box in the page. Targets desktop **and Android TV**.
   budget. Anything that assumes a hash needs a `t.url` branch.
 - **A film the user already owns rides that same `url` path, and nothing scans
   for it.** `LocalFileButton.vue` opens the OS file picker on a title you have
-  already found and files the path under its progress key (`ventic.local`);
+  already found and files the path under its progress key (`surfex.local`);
   `startTorrent`'s `local` option then returns it exactly as it returns a debrid
   link. That is the whole feature — there is deliberately no folder to configure,
   no filename parser and no title matcher, because the user did the matching and
@@ -215,7 +215,7 @@ keeps glued to a box in the page. Targets desktop **and Android TV**.
   never do — mpv and ExoPlayer open the channel URL themselves, which is why
   `media3-exoplayer-hls` is in the Android gradle file: without it
   `DefaultMediaSourceFactory` cannot read an `.m3u8`, and every channel fails
-  there and nowhere else. `ventic.playlists` is in `backup.ts`'s `SECRET` set —
+  there and nowhere else. `surfex.playlists` is in `backup.ts`'s `SECRET` set —
   an Xtream URL carries the account's password — and the Sources line holds
   here too: no default playlist, no bundled index, no link to one anywhere in
   the repo. Deliberately absent, each a project rather than a function: EPG
@@ -400,7 +400,7 @@ keeps glued to a box in the page. Targets desktop **and Android TV**.
   templates both call the auto-imported `localePath()` from `app/utils/i18n.ts`
   rather than the module's `$localePath` — that one is typed for route *names*,
   and the wrapper is the single place that hands it a path. The choice is
-  remembered in `ventic.locale` and restored in `app.vue` — not in this module's
+  remembered in `surfex.locale` and restored in `app.vue` — not in this module's
   cookie, which a `tauri://` origin does not reliably keep, and which no backup
   would carry.
 - **A settings section is a page, not a branch.** Every section under
@@ -429,7 +429,7 @@ keeps glued to a box in the page. Targets desktop **and Android TV**.
 
 ## The app ships with no sources — keep it that way
 
-Ventic searches only the servers a user adds under *Settings → Sources*. That is
+Surfex searches only the servers a user adds under *Settings → Sources*. That is
 a deliberate line, not an oversight, and it is the whole reason this project can
 be published:
 
@@ -443,7 +443,7 @@ be published:
 - A source is a plain HTTP+JSON endpoint (Stremio addon protocol). Don't grow
   this into a plugin runtime that executes third-party code — it buys nothing
   and adds an RCE surface.
-- `ventic://` deep links stage a source and **always ask before adding it**
+- `surfex://` deep links stage a source and **always ask before adding it**
   (`plugins/deeplink.client.ts` → `ui.pendingSource` → the dialog in
   `pages/settings/sources.vue`). Never add one straight from a link: a web page must
   not be able to change what the app searches. Publishing such a link is for

@@ -5,7 +5,7 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# The frontend calls these by name off `window.VenticScreen` / `window.VenticPlayer`
+# The frontend calls these by name off `window.SurfexScreen` / `window.SurfexPlayer`
 # (see app/utils/platform.ts and MpvPlayer.vue), so the method names are load-bearing
 # in a way nothing in the Kotlin references — R8 sees no caller and is free to rename
 # them. It renames them to something short, the bridge silently answers `undefined`,
@@ -18,7 +18,7 @@
 
 # Referenced only from AndroidManifest.xml as ".DownloadService" — the foreground
 # service that keeps the in-process torrent engine alive when the app is backgrounded.
--keep class com.ventic.app.DownloadService { *; }
+-keep class com.surfex.app.DownloadService { *; }
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.

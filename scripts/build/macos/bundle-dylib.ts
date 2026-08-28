@@ -113,8 +113,8 @@ function binary(): string {
   const profile = process.env.TAURI_ENV_DEBUG === 'true' ? 'debug' : 'release'
   const triple = process.env.TAURI_ENV_TARGET_TRIPLE
   const paths = [
-    ...(triple ? [`src-tauri/target/${triple}/${profile}/ventic`] : []),
-    `src-tauri/target/${profile}/ventic`,
+    ...(triple ? [`src-tauri/target/${triple}/${profile}/surfex`] : []),
+    `src-tauri/target/${profile}/surfex`,
   ]
   return paths.find(existsSync) ?? die(`No built binary at ${paths.join(' or ')}.`)
 }

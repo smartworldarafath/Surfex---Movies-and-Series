@@ -19,8 +19,8 @@ use std::time::Duration;
 pub fn paths() -> (PathBuf, PathBuf) {
 	let dir = std::env::temp_dir();
 	let pid = std::process::id();
-	let ipc = dir.join(format!("ventic-mpv-{pid}.sock"));
-	let log = dir.join(format!("ventic-mpv-{pid}.log"));
+	let ipc = dir.join(format!("surfex-mpv-{pid}.sock"));
+	let log = dir.join(format!("surfex-mpv-{pid}.log"));
 	let _ = std::fs::remove_file(&ipc);
 	let _ = std::fs::remove_file(&log);
 	(ipc, log)

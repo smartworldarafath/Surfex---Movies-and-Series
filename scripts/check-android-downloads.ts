@@ -12,7 +12,7 @@ import { readFileSync } from 'node:fs'
 import { ENGINE } from '../app/utils/torrents'
 
 const kotlin = readFileSync(
-  new URL('../src-tauri/gen/android/app/src/main/java/com/ventic/app/Downloads.kt', import.meta.url),
+  new URL('../src-tauri/gen/android/app/src/main/java/com/surfex/app/Downloads.kt', import.meta.url),
   'utf8',
 )
 const torrents = readFileSync(new URL('../app/utils/torrents.ts', import.meta.url), 'utf8')
@@ -22,7 +22,7 @@ const manifest = readFileSync(
   'utf8',
 )
 const activity = readFileSync(
-  new URL('../src-tauri/gen/android/app/src/main/java/com/ventic/app/MainActivity.kt', import.meta.url),
+  new URL('../src-tauri/gen/android/app/src/main/java/com/surfex/app/MainActivity.kt', import.meta.url),
   'utf8',
 )
 
@@ -73,13 +73,13 @@ for (const permission of [
 }
 
 // The other half of the same seam: "only download on Wi-Fi" asks Android whether
-// the network is metered over the VenticScreen bridge, and a method renamed on
+// the network is metered over the SurfexScreen bridge, and a method renamed on
 // one side of that is a setting that silently never fires.
 const platform = readFileSync(new URL('../app/utils/platform.ts', import.meta.url), 'utf8')
 assert.ok(activity.includes('fun metered()'), 'MainActivity answers metered()')
 assert.ok(platform.includes('metered?.()'), 'and meteredNetwork() is what calls it')
-assert.ok(platform.includes('VenticScreen'), 'through the interface MainActivity registers')
-assert.ok(activity.includes('"VenticScreen"'), 'under that name')
+assert.ok(platform.includes('SurfexScreen'), 'through the interface MainActivity registers')
+assert.ok(activity.includes('"SurfexScreen"'), 'under that name')
 
 // And the same again for the drive list, which is the only way to send downloads
 // to a USB stick on a TV — Android offers no folder chooser, so a rename here

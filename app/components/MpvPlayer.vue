@@ -126,7 +126,7 @@ const exo = hasExoPlayer()
 /**
  * Is the picture painted behind the webview? ExoPlayer's surface and macOS's
  * mpv view both are, and the page's side of that is identical for the two: it
- * has to stop painting over the box (`ventic-video` below), and the taps land
+ * has to stop painting over the box (`surfex-video` below), and the taps land
  * on the page because there is no picture element under the finger.
  */
 const behind = exo || (native && !overlay)
@@ -948,7 +948,7 @@ async function setWindowFullscreen(on: boolean) {
   // does have is system bars in the way and a rotation that should be locked
   // while a film is on, and the webview implements neither the Fullscreen API
   // nor screen.orientation.lock. MainActivity.kt exposes both instead.
-  const android = (window as any).SurfexScreen || (window as any).VenticScreen
+  const android = (window as any).SurfexScreen || (window as any).SurfexScreen
   if (android?.setPlayerMode) {
     android.setPlayerMode(on)
     return
@@ -2081,7 +2081,7 @@ watch(() => props.src, src => {
  */
 watch(() => behind && started.value, on => {
   document.documentElement.classList.toggle('surfex-video', on)
-  document.documentElement.classList.toggle('ventic-video', on)
+  document.documentElement.classList.toggle('surfex-video', on)
 })
 
 onMounted(() => {
@@ -2100,7 +2100,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   cancelAnimationFrame(rafId)
   document.documentElement.classList.remove('surfex-video')
-  document.documentElement.classList.remove('ventic-video')
+  document.documentElement.classList.remove('surfex-video')
   window.removeEventListener('keydown', onKey, true)
   live = false
   nativeMouse.forEach(off => off())
@@ -2738,9 +2738,9 @@ defineExpose({ osd, position: readonly(position) })
 html.surfex-video,
 html.surfex-video :has([data-video-hole]),
 html.surfex-video [data-video-hole],
-html.ventic-video,
-html.ventic-video :has([data-video-hole]),
-html.ventic-video [data-video-hole] {
+html.surfex-video,
+html.surfex-video :has([data-video-hole]),
+html.surfex-video [data-video-hole] {
   background: transparent !important;
 }
 </style>

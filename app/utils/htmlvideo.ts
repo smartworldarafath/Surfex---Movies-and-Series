@@ -87,7 +87,7 @@ interface ExoBridge {
 }
 
 function exoBridge(): ExoBridge | null {
-  return (globalThis as { VenticPlayer?: ExoBridge }).VenticPlayer ?? null
+  return (globalThis as { SurfexPlayer?: ExoBridge }).SurfexPlayer ?? null
 }
 
 /** Is ExoPlayer behind the controls? Android only, and only once the page is in it. */

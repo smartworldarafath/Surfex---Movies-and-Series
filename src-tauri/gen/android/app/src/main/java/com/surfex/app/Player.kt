@@ -243,7 +243,7 @@ class SurfexPlayer(private val activity: MainActivity) {
       resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
       setShutterBackgroundColor(Color.BLACK)
       // The bars around a film that doesn't fill the screen. Without this the
-      // window's own background (@color/ventic_ground) shows there, so a 4:3
+      // window's own background (@color/surfex_ground) shows there, so a 4:3
       // film sat in two stripes of the app's grey. The view is GONE unless
       // something is playing, so nothing else goes black.
       setBackgroundColor(Color.BLACK)

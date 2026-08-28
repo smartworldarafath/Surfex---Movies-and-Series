@@ -10,7 +10,7 @@ import { mdiCast, mdiCastConnected, mdiCheck, mdiContentCopy, mdiMagnify, mdiTel
  * streams the copy that is already downloaded rather than fetching a second.
  *
  * Devices are found by asking every address on the subnet whether it is a
- * Ventic, and the code typed here is the one the receiving device shows on its
+ * Surfex, and the code typed here is the one the receiving device shows on its
  * own screen — the network is not a permission, and a television anyone on the
  * Wi-Fi can interrupt is not one anybody wants.
  */
@@ -76,7 +76,7 @@ async function scan() {
 
   const self = await castAddress()
   if (!self) {
-    error.value = { message: $t('This device isn\'t on a network Ventic can see. Type the other device\'s address instead.') }
+    error.value = { message: $t('This device isn\'t on a network Surfex can see. Type the other device\'s address instead.') }
     return
   }
 

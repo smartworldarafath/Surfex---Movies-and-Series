@@ -3,6 +3,7 @@ import type { SubtitleStyle } from '~/utils/subtitles'
 import {
   mdiAccountCircleOutline,
   mdiFolderOutline,
+  mdiHeartOutline,
   mdiInformationOutline,
   mdiPaletteOutline,
   mdiPowerPlugOutline,
@@ -15,7 +16,7 @@ import {
 import { StorageSerializers } from '@vueuse/core'
 import { DEFAULT_SOURCE } from '~/theme/presets'
 
-export type SectionKey = 'appearance' | 'language' | 'sources' | 'subtitles' | 'audio' | 'network' | 'storage' | 'account' | 'updates' | 'about'
+export type SectionKey = 'appearance' | 'language' | 'sources' | 'subtitles' | 'audio' | 'network' | 'storage' | 'account' | 'support' | 'updates' | 'about'
 
 /**
  * The sidebar of the settings layout, in the order it lists them. A `value` is
@@ -36,6 +37,7 @@ export const SECTIONS: { value: SectionKey, title: () => string, icon: string }[
   { value: 'network', title: () => $t('Network'), icon: mdiWifi },
   { value: 'storage', title: () => $t('Storage'), icon: mdiFolderOutline },
   { value: 'account', title: () => $t('Account'), icon: mdiAccountCircleOutline },
+  { value: 'support', title: () => $t('Support & Donate'), icon: mdiHeartOutline },
   { value: 'updates', title: () => $t('Updates'), icon: mdiUpdate },
   { value: 'about', title: () => $t('About'), icon: mdiInformationOutline },
 ]
@@ -58,7 +60,7 @@ export const useSettingsStore = defineStore('settings', () => {
    * This is only where the choice is *remembered* — @nuxtjs/i18n owns the live
    * one. app.vue is what marries the two: it restores this at boot and writes
    * it back whenever the locale changes. The module's own memory is a cookie,
-   * which a `tauri://` origin does not reliably keep — and a `ventic.` key
+   * which a `tauri://` origin does not reliably keep — and a `surfex.` key
    * travels in a backup, which a cookie also would not.
    */
   const locale = useLocalStorage('surfex.locale', '')
@@ -140,7 +142,7 @@ export const useSettingsStore = defineStore('settings', () => {
 
   // --- Casting ---
   /**
-   * Answer play commands from other Ventics on this network. Off by default and
+   * Answer play commands from other Surfexs on this network. Off by default and
    * deliberately: it opens a port, and a television nobody asked to be cast to
    * is a television anyone on the Wi-Fi can interrupt.
    */
@@ -151,7 +153,7 @@ export const useSettingsStore = defineStore('settings', () => {
 
   /**
    * The pairing code this device shows and expects. Generated once and kept, so
-   * the phone that has been paired stays paired — `ventic.castCode` is in
+   * the phone that has been paired stays paired — `surfex.castCode` is in
    * `backup.ts`'s SECRET set, since a code that travelled in an export would be
    * a code the export's reader can cast with.
    */
@@ -192,7 +194,7 @@ export const useSettingsStore = defineStore('settings', () => {
    * The pair is one setting in two halves, and the player edits it as much as
    * this page does: picking a language while watching is what the *next* film
    * should open in, and turning subtitles off is how you say "not any more".
-   * That was already the behaviour — it lived in `ventic.subLang`, which the
+   * That was already the behaviour — it lived in `surfex.subLang`, which the
    * player cleared to mean off — this only gives it a name and a switch, so it
    * can be chosen up front instead of discovered.
    */
