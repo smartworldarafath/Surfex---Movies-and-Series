@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preinstall": "npx only-allow bun",
     "postinstall": "nuxt prepare",
     "lint": "eslint . --fix",
     "logo": "tauri icon public/logo.svg && cp src-tauri/icons/icon.png public/logo.png",

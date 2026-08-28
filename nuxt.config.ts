@@ -162,7 +162,7 @@ export default defineNuxtConfig({
 
   vuetify: {
     moduleOptions: {
-      styles: { configFile: 'app/assets/css/settings.scss' },
+      styles: true,
       // Vuetify auto-imports a `useLayout` that collides with Nuxt's built-in
       // one, and warns about it on every dev boot. We only ever use these two.
       importComposables: ['useDisplay', 'useTheme'],
