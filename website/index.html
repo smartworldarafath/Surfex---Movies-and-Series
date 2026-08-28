@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Surfex - a media library and BitTorrent player</title>
+  <meta name="description" content="Surfex is a media library and BitTorrent player for the desktop, Android and Android TV. It plays torrents in a real mpv window, keeps your library on your own device, and ships with no sources.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Surfex">
+  <meta property="og:title" content="Surfex - a media library and BitTorrent player">
+  <meta property="og:description" content="A media library and BitTorrent player for the desktop and Android TV. Plays torrents in a real mpv window, keeps your library on your own device, and ships with no sources.">
+  <meta property="og:image" content="/assets/shots/detail.png">
+  <meta name="theme-color" content="#141011">
+  <link rel="icon" href="/assets/logo.svg">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="site-ground"></div>
+  <div class="site-grid"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="wrap nav-container">
+      <div style="display: flex; align-items: center;">
+        <a href="/" class="brand-link">
+          <img src="/assets/logo.svg" alt="Surfex Logo" class="brand-logo">
+          <span>Surfex</span>
+        </a>
+        <nav class="nav-menu">
+          <a href="#features" class="nav-item">Features</a>
+          <a href="#player" class="nav-item">Player</a>
+          <a href="#downloads" class="nav-item">Downloads</a>
+          <a href="#themes" class="nav-item">Themes</a>
+          <a href="#sources" class="nav-item">Sources</a>
+          <a href="#privacy" class="nav-item">Privacy</a>
+          <a href="#faq" class="nav-item">FAQ</a>
+          <a href="/support/" class="nav-item">Support</a>
+        </nav>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series" target="_blank" rel="noopener" class="btn-icon" aria-label="Surfex on GitHub" title="Surfex on GitHub">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg>
+        </a>
+        <a href="/download/" class="btn btn-primary" style="display: none;" id="headerDownloadBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"></path></svg>
+          <span>Download</span>
+        </a>
+        <script>if (window.innerWidth > 600) document.getElementById('headerDownloadBtn').style.display = 'inline-flex';</script>
+        <button class="btn-icon mobile-toggle" aria-label="Open Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <a href="#features" class="nav-item">Features</a>
+    <a href="#player" class="nav-item">Player</a>
+    <a href="#downloads" class="nav-item">Downloads</a>
+    <a href="#themes" class="nav-item">Themes</a>
+    <a href="#sources" class="nav-item">Sources</a>
+    <a href="#privacy" class="nav-item">Privacy</a>
+    <a href="#faq" class="nav-item">FAQ</a>
+    <a href="/download/" class="nav-item" style="color: var(--primary); font-weight: 700;">Download Surfex</a>
+    <a href="/tv/" class="nav-item">Install on a TV</a>
+    <a href="/support/" class="nav-item">Support & Donations</a>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero wrap">
+      <a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series/releases" target="_blank" rel="noopener" class="chip-badge">
+        <span class="text-primary">Open source</span>
+        <span>·</span>
+        <span>MIT · Windows, Linux, macOS, Android & Android TV</span>
+      </a>
+
+      <h1 class="hero-title">
+        A media library that <span class="accent">plays anything</span> you point it at
+      </h1>
+
+      <p class="lead">
+        Surfex streams torrents into a real mpv window — HEVC, AV1, DTS, half-downloaded MKVs, all of it. The BitTorrent engine runs inside the app, the library never leaves your device, and it ships with nowhere to search until you say so.
+      </p>
+
+      <div class="hero-cta">
+        <a href="/download/" class="btn btn-primary btn-lg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"></path></svg>
+          <span>Download</span>
+        </a>
+        <a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series" target="_blank" rel="noopener" class="btn btn-tonal btn-lg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg>
+          <span>Source on GitHub</span>
+        </a>
+      </div>
+
+      <p class="hero-note">Free forever · No account · No telemetry</p>
+
+      <div class="shot-container">
+        <div class="shot-frame">
+          <img src="/assets/shots/home_screen.png" alt="Surfex Home Screen">
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Surfex / Features -->
+    <section id="features" class="feature-section wrap">
+      <div class="text-center">
+        <div class="section-tag">Why Surfex</div>
+        <h2 class="section-title">Most torrent players are a video tag in a trench coat</h2>
+        <p class="lead">The codec support shows. Surfex embeds the real thing and keeps the library around it honest and local.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22 10V13.81C21.39 13.46 20.72 13.22 20 13.09V12H4V20H13.09C13.21 20.72 13.46 21.39 13.81 22H4C2.9 22 2 21.11 2 20V10H22M16.71 7.07L13.97 3.54L12 3.93L14.75 7.46L16.71 7.07M21.62 6.1L20.84 2.18L16.91 2.96L19.65 6.5L21.62 6.1M11.81 8.05L9.07 4.5L7.1 4.91L9.85 8.44L11.81 8.05M4.16 5.5L3.18 5.69C2.1 5.9 1.39 6.96 1.61 8.04L2 10L6.9 9.03L4.16 5.5M17 22L22 19L17 16V22Z"></path></svg>
+          </div>
+          <h3 class="card-title">A real mpv window, not a video tag</h3>
+          <p class="card-text">On Linux and Windows the Rust side parents an actual mpv window into the page and keeps it glued to a box in the layout. mpv carries its own ffmpeg, so HEVC, AV1, 10-bit, E-AC-3, DTS and half-downloaded MKVs play with no codec packs.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18,11H14.82C14.4,9.84 13.3,9 12,9C10.7,9 9.6,9.84 9.18,11H6C5.67,11 4,10.9 4,9V8C4,6.17 5.54,6 6,6H16.18C16.6,7.16 17.7,8 19,8A3,3 0 0,0 22,5A3,3 0 0,0 19,2C17.7,2 16.6,2.84 16.18,4H6C4.39,4 2,5.06 2,8V9C2,11.94 4.39,13 6,13H9.18C9.6,14.16 10.7,15 12,15C13.3,15 14.4,14.16 14.82,13H18C18.33,13 20,13.1 20,15V16C20,17.83 18.46,18 18,18H7.82C7.4,16.84 6.3,16 5,16A3,3 0 0,0 2,19A3,3 0 0,0 5,22C6.3,22 7.4,21.16 7.82,20H18C19.61,20 22,18.93 22,16V15C22,12.07 19.61,11 18,11M19,4A1,1 0 0,1 20,5A1,1 0 0,1 19,6A1,1 0 0,1 18,5A1,1 0 0,1 19,4M5,20A1,1 0 0,1 4,19A1,1 0 0,1 5,18A1,1 0 0,1 6,19A1,1 0 0,1 5,20Z"></path></svg>
+          </div>
+          <h3 class="card-title">The engine is in the app</h3>
+          <p class="card-text">librqbit runs in-process — a full downloads page with file pickers, seeding, speed limits and a disk budget, rather than a hidden cache you cannot see or control.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15,20A1,1 0 0,0 14,19H13V17H17A2,2 0 0,0 19,15V5A2,2 0 0,0 17,3H7A2,2 0 0,0 5,5V15A2,2 0 0,0 7,17H11V19H10A1,1 0 0,0 9,20H2V22H9A1,1 0 0,0 10,23H14A1,1 0 0,0 15,22H22V20H15M7,15V5H17V15H7M10,14V6L15,10L10,14Z"></path></svg>
+          </div>
+          <h3 class="card-title">Playback starts on the first bytes</h3>
+          <p class="card-text">You are watching while it downloads. A title already on disk replays with no metadata lookup, no source search and no peers at all.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22,17H18V10H22M23,8H17A1,1 0 0,0 16,9V19A1,1 0 0,0 17,20H23A1,1 0 0,0 24,19V9A1,1 0 0,0 23,8M4,6H22V4H4A2,2 0 0,0 2,6V17H0V20H14V17H4V6Z"></path></svg>
+          </div>
+          <h3 class="card-title">One player, three backends</h3>
+          <p class="card-text">Where mpv cannot be embedded, ExoPlayer or the webview answers the same command protocol — so there is one player component and one set of controls, not three.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 12.45V9.64C7.47 10.47 9.61 11 12 11S16.53 10.47 18 9.64V11.05C18.17 11.03 18.33 11 18.5 11C19.03 11 19.53 11.1 20 11.26V7C20 4.79 16.42 3 12 3S4 4.79 4 7V17C4 19.21 7.59 21 12 21C12.34 21 12.67 21 13 20.97V18.95C12.68 19 12.35 19 12 19C8.13 19 6 17.5 6 17V14.77C7.61 15.55 9.72 16 12 16C12.41 16 12.81 15.97 13.21 15.94C13.4 15.46 13.68 15.03 14.07 14.7C14.13 14.39 14.23 14.09 14.34 13.8C13.6 13.93 12.81 14 12 14C9.58 14 7.3 13.4 6 12.45M12 5C15.87 5 18 6.5 18 7S15.87 9 12 9 6 7.5 6 7 8.13 5 12 5M21 16V15.5C21 14.12 19.88 13 18.5 13S16 14.12 16 15.5V16C15.45 16 15 16.45 15 17V21C15 21.55 15.45 22 16 22H21C21.55 22 22 21.55 22 21V17C22 16.45 21.55 16 21 16M20 16H17V15.5C17 14.67 17.67 14 18.5 14S20 14.67 20 15.5V16Z"></path></svg>
+          </div>
+          <h3 class="card-title">Your library stays yours</h3>
+          <p class="card-text">History, progress, favourites and the watchlist live in this device's storage. No Surfex account, no Surfex server, no sync — and one backup file carries the lot to another machine.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9,2C7.89,2 7,2.89 7,4V20C7,21.11 7.89,22 9,22H15C16.11,22 17,21.11 17,20V4C17,2.89 16.11,2 15,2H13V4H11V2H9M11,6H13V8H15V10H13V12H11V10H9V8H11V6M9,14H11V16H9V14M13,14H15V16H13V14M9,18H11V20H9V18M13,18H15V20H13V18Z"></path></svg>
+          </div>
+          <h3 class="card-title">Usable from the sofa</h3>
+          <p class="card-text">Full d-pad navigation, a focus style anywhere there is a hover style, and an Android TV build. A remote reaches everything a mouse does.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Player -->
+    <section id="player" class="feature-section wrap">
+      <div class="grid-2">
+        <div>
+          <div class="section-tag">The player</div>
+          <h2 class="section-title">Everything about the picture, in one place</h2>
+          <p class="lead" style="margin-top: 1rem;">
+            The native mpv surface paints above the webview, so the controls cannot simply be stacked over it. Every overlay measures its own rectangle each frame and the Rust side subtracts it from mpv's window — the page shows through the holes, clicks included, while the video window itself never resizes.
+          </p>
+
+          <ul class="feature-list">
+            <li><span class="bullet-dot"></span><span>Seek-preview frames pulled with ffmpeg and cached, warmed only while the control bar is up</span></li>
+            <li><span class="bullet-dot"></span><span>The file's own audio and subtitle tracks, the release's subtitle files and OpenSubtitles in one menu</span></li>
+            <li><span class="bullet-dot"></span><span>Subtitle font, size, colour, outline and position — applied to mpv and to page-drawn cues alike</span></li>
+            <li><span class="bullet-dot"></span><span>Auto-sync slides a mismatched subtitle onto the audio's silence map and reports its confidence</span></li>
+            <li><span class="bullet-dot"></span><span>Progress recorded per episode, picked back up from the card or the detail page</span></li>
+          </ul>
+
+          <div class="chips-wrap">
+            <span class="chip-tag">HEVC</span>
+            <span class="chip-tag">AV1</span>
+            <span class="chip-tag">10-bit</span>
+            <span class="chip-tag">E-AC-3</span>
+            <span class="chip-tag">DTS</span>
+            <span class="chip-tag">x264</span>
+            <span class="chip-tag">AAC</span>
+            <span class="chip-tag">MKV</span>
+            <span class="chip-tag">Half-downloaded files</span>
+          </div>
+        </div>
+
+        <div class="shot-frame">
+          <img src="/assets/shots/player.png" alt="Surfex Player">
+        </div>
+      </div>
+    </section>
+
+    <!-- Downloads / Torrent Engine -->
+    <section id="downloads" class="feature-section wrap">
+      <div class="grid-2 reverse">
+        <div class="shot-frame">
+          <img src="/assets/shots/downloads.png" alt="Surfex Downloads Engine">
+        </div>
+
+        <div>
+          <div class="section-tag">Downloads</div>
+          <h2 class="section-title">A torrent client that happens to have a library on top</h2>
+          <p class="lead" style="margin-top: 1rem;">
+            Paste a magnet and it plays. The downloads page is the engine's own UI, so nothing is hidden behind a "cache" setting — and with no sources configured, that is a complete BitTorrent client on its own.
+          </p>
+
+          <ul class="feature-list">
+            <li><span class="bullet-dot"></span><span>Magnets, .torrent files, or a release picked from a source you added</span></li>
+            <li><span class="bullet-dot"></span><span>Pick what to fetch inside a torrent — a season pack downloads the one episode</span></li>
+            <li><span class="bullet-dot"></span><span>Seeding on by default, with upload and download limits</span></li>
+            <li><span class="bullet-dot"></span><span>A disk budget that evicts oldest-watched first and never touches what is playing</span></li>
+            <li><span class="bullet-dot"></span><span>Wi-Fi only pauses background torrents on a metered connection and restarts exactly those</span></li>
+            <li><span class="bullet-dot"></span><span>On Android a foreground service keeps downloading when you switch apps</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Themes / Appearance -->
+    <section id="themes" class="feature-section wrap">
+      <div class="grid-2">
+        <div>
+          <div class="section-tag">Appearance</div>
+          <h2 class="section-title">26 themes, or one built from a colour you pick</h2>
+          <p class="lead" style="margin-top: 1rem;">
+            Pick a colour off the spectrum slider and every role from primary-container to on-tertiary-fixed-variant is derived with Google's own generator — the engine behind Material Theme Builder. Every foreground and background pair's contrast is asserted by a check script rather than eyeballed.
+          </p>
+
+          <ul class="feature-list">
+            <li><span class="bullet-dot"></span><span>Surfex Dark, Midnight (OLED), Nord, Tokyo Night, Mocha, Dracula, Gruvbox, Solarized and more</span></li>
+            <li><span class="bullet-dot"></span><span>A theme is a preset: it can carry the background it was drawn for, with its own blur and tint</span></li>
+            <li><span class="bullet-dot"></span><span>Poster art behind the app, a picture of your own, or nothing at all</span></li>
+            <li><span class="bullet-dot"></span><span>App scale, poster size, a performance switch for televisions, and a global CSS box</span></li>
+          </ul>
+
+          <div class="swatches-grid">
+            <div title="Surfex Dark" class="theme-swatch" style="background:#141011;"><span class="theme-swatch-dot" style="background:#ff5555;"></span></div>
+            <div title="Midnight" class="theme-swatch" style="background:#000000;"><span class="theme-swatch-dot" style="background:#9fd8ff;"></span></div>
+            <div title="Nord" class="theme-swatch" style="background:#272c36;"><span class="theme-swatch-dot" style="background:#88c0d0;"></span></div>
+            <div title="Tokyo Night" class="theme-swatch" style="background:#1a1b26;"><span class="theme-swatch-dot" style="background:#7aa2f7;"></span></div>
+            <div title="Mocha" class="theme-swatch" style="background:#181825;"><span class="theme-swatch-dot" style="background:#cba6f7;"></span></div>
+            <div title="Dracula" class="theme-swatch" style="background:#282a36;"><span class="theme-swatch-dot" style="background:#bd93f9;"></span></div>
+            <div title="Gruvbox" class="theme-swatch" style="background:#282828;"><span class="theme-swatch-dot" style="background:#fabd2f;"></span></div>
+            <div title="Monokai" class="theme-swatch" style="background:#272822;"><span class="theme-swatch-dot" style="background:#a6e22e;"></span></div>
+            <div title="Rosé Pine" class="theme-swatch" style="background:#191724;"><span class="theme-swatch-dot" style="background:#ebbcba;"></span></div>
+            <div title="Forest" class="theme-swatch" style="background:#0e1512;"><span class="theme-swatch-dot" style="background:#8fd8a8;"></span></div>
+            <div title="Abyss" class="theme-swatch" style="background:#0b1a2b;"><span class="theme-swatch-dot" style="background:#58c4ff;"></span></div>
+            <div title="Paper" class="theme-swatch" style="background:#fdf8f1;"><span class="theme-swatch-dot" style="background:#7a5900;"></span></div>
+          </div>
+        </div>
+
+        <div class="shot-frame">
+          <img src="/assets/shots/themes.png" alt="Surfex Appearance & Themes">
+        </div>
+      </div>
+    </section>
+
+    <!-- Eight Rooms -->
+    <section class="feature-section wrap">
+      <div class="text-center">
+        <div class="section-tag">The app</div>
+        <h2 class="section-title">Eight rooms, and TMDB metadata through all of them</h2>
+        <p class="lead">Posters, backdrops, cast, ratings, per-episode watched state and resume points — with favourites, a watchlist and history kept on the device.</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">Home</div>
+          <p class="card-text" style="font-size: 0.85rem;">Continue watching, trending today, popular, top rated, in cinemas</p>
+        </div>
+
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18,9H16V7H18M18,13H16V11H18M18,17H16V15H18M8,9H6V7H8M8,13H6V11H8M8,17H6V15H8M18,3V5H16V3H8V5H6V3H4V21H6V19H8V21H16V19H18V21H20V3H18Z"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">Movies · TV · Anime</div>
+          <p class="card-text" style="font-size: 0.85rem;">Browse rows in a grid or a list, remembered per session</p>
+        </div>
+
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">Search</div>
+          <p class="card-text" style="font-size: 0.85rem;">One box across TMDB; a result carries straight through to a source search</p>
+        </div>
+
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">Favourites</div>
+          <p class="card-text" style="font-size: 0.85rem;">The local list, on the device, uncapped</p>
+        </div>
+
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17,18L12,15.82L7,18V5H17M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">Watchlist</div>
+          <p class="card-text" style="font-size: 0.85rem;">What you mean to get to, kept next to the rest</p>
+        </div>
+
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">History</div>
+          <p class="card-text" style="font-size: 0.85rem;">What you watched and where you stopped, per episode</p>
+        </div>
+
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5,4.5H21.5C22.34,4.5 23,5.15 23,6V17.5C23,18.35 22.34,19 21.5,19H2.5C1.65,19 1,18.35 1,17.5V6C1,5.15 1.65,4.5 2.5,4.5M9.71,8.5V15L15.42,11.7L9.71,8.5M17.25,21H6.65C6.35,21 6.15,20.8 6.15,20.5C6.15,20.2 6.35,20 6.65,20H17.35C17.65,20 17.85,20.2 17.85,20.5C17.85,20.8 17.55,21 17.25,21Z"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">Detail</div>
+          <p class="card-text" style="font-size: 0.85rem;">Backdrop, synopsis, cast, trailer, seasons and per-episode state</p>
+        </div>
+
+        <div class="card" style="padding: 1.25rem;">
+          <div class="card-icon tertiary"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,17V19H9V17H3M3,5V7H13V5H3M13,21V19H21V17H13V15H11V21H13M7,9V11H3V13H7V15H9V9H7M21,13V11H11V13H21M15,9H17V7H21V5H17V3H15V9Z"></path></svg></div>
+          <div class="card-title" style="font-size: 1.05rem;">Settings</div>
+          <p class="card-text" style="font-size: 0.85rem;">Appearance, sources, subtitles, network, storage, account, about</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Playback & Multi-Platform -->
+    <section class="feature-section wrap">
+      <div class="grid-2">
+        <div>
+          <div class="section-tag">Playback</div>
+          <h2 class="section-title">The right player for the screen it is on</h2>
+          <p class="lead" style="margin-top: 1rem;">
+            Ranking asks the device rather than guessing: a release name is read for the codecs it claims and each is put to the device's own decoder list, so a TV keeps the Dolby copy it can play and a phone that cannot is steered off it — never at the cost of a quality tier.
+          </p>
+          <p style="color: var(--text-dim); margin-top: 1rem; font-size: 0.95rem;">
+            When something still fails, the error names the likely cause instead of showing a black rectangle.
+          </p>
+        </div>
+
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div style="display: flex; gap: 1rem; padding: 1.25rem; border-bottom: 1px solid var(--outline-variant);">
+            <div style="font-size: 1.5rem;">🐧</div>
+            <div>
+              <div style="display: flex; gap: 0.5rem; align-items: baseline;">
+                <span style="font-weight: 700; color: #ffffff;">Linux</span>
+                <span class="chip-tag" style="background: rgba(255,85,85,0.15); color: var(--primary); border-color: var(--primary);">mpv</span>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Needs mpv and ffmpeg from your package manager</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; padding: 1.25rem; border-bottom: 1px solid var(--outline-variant);">
+            <div style="font-size: 1.5rem;">🪟</div>
+            <div>
+              <div style="display: flex; gap: 0.5rem; align-items: baseline;">
+                <span style="font-weight: 700; color: #ffffff;">Windows</span>
+                <span class="chip-tag" style="background: rgba(255,85,85,0.15); color: var(--primary); border-color: var(--primary);">mpv</span>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Ships its own mpv and ffmpeg — nothing to install</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; padding: 1.25rem; border-bottom: 1px solid var(--outline-variant);">
+            <div style="font-size: 1.5rem;">🤖</div>
+            <div>
+              <div style="display: flex; gap: 0.5rem; align-items: baseline;">
+                <span style="font-weight: 700; color: #ffffff;">Android · Android TV</span>
+                <span class="chip-tag" style="background: rgba(255,85,85,0.15); color: var(--primary); border-color: var(--primary);">ExoPlayer</span>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">The device's own decoders; landscape and immersive while playing</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; padding: 1.25rem;">
+            <div style="font-size: 1.5rem;">🍎</div>
+            <div>
+              <div style="display: flex; gap: 0.5rem; align-items: baseline;">
+                <span style="font-weight: 700; color: #ffffff;">macOS</span>
+                <span class="chip-tag" style="background: rgba(255,85,85,0.15); color: var(--primary); border-color: var(--primary);">libmpv, in-process</span>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Links libmpv directly; smooth rendering and hardware decoding</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section id="sources" class="feature-section wrap">
+      <div class="text-center">
+        <div class="section-tag">Sources</div>
+        <h2 class="section-title">It ships with nowhere to look</h2>
+        <p class="lead">Surfex hosts no content and indexes no content. It searches nothing on its own and will not suggest anywhere to look. A source is a URL <em>you</em> add.</p>
+      </div>
+
+      <div class="grid-2" style="margin-top: 3rem;">
+        <div class="card">
+          <h3 class="card-title">The whole integration</h3>
+          <p class="card-text">A source is a server that speaks the Stremio addon protocol. Surfex runs no code from one — it reads the JSON, ranks the results and hands the one you pick to its own engine.</p>
+          <pre class="code-block" style="margin-top: 1rem;"><code>GET  {source}/stream/movie/{imdbId}.json
+GET  {source}/stream/series/{imdbId}:{s}:{e}.json
+→    { "streams": [ { "infoHash": "…", "title": "…" } ] }</code></pre>
+          <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 1rem;">Add several and their results merge, duplicates dropped. A stream that names a URL instead of an info hash — what a debrid addon answers with — is played directly, with no swarm joined and nothing written to disk.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div class="card">
+            <h3 class="card-title">A link can never change what it searches</h3>
+            <p class="card-text">Surfex registers the <code style="color: var(--primary); font-family: var(--font-mono);">surfex://</code> scheme so an addon page can offer a one-click install. The app shows the URL in full and asks before adding it — always.</p>
+          </div>
+
+          <div class="alert-box">
+            <div>
+              <strong>Disclaimer:</strong> This project does not host, run, bundle, endorse or recommend any source, and distributes no list of them. What a given source offers, and whether you have the right to play it, is a matter between you and whoever operates it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacy" class="feature-section wrap">
+      <div class="text-center">
+        <div class="section-tag">Privacy</div>
+        <h2 class="section-title">Nothing phones home</h2>
+      </div>
+
+      <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+        <div class="card">
+          <div class="card-icon tertiary"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5,18.5L9.5,12.5L13.5,16.5L22,6.92L20.59,5.5L13.5,13.5L9.5,9.5L2,17L3.5,18.5Z"></path></svg></div>
+          <h3 class="card-title">No analytics or telemetry</h3>
+          <p class="card-text">Nothing phones home. There is no build flag to turn back on.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon tertiary"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M2.75,7L4.03,5.75L13.26,15L20,21.72L18.73,23L15.73,20H4V17C4,15.14 6.61,13.92 9.09,13.36L2.75,7M20,17V19.18L18.1,17.28V17C18.1,16.74 17.6,16.35 16.8,16L14,13.18C16.71,13.63 20,14.91 20,17M5.9,17V18.1H13.83L10.72,15C8.19,15.3 5.9,16.45 5.9,17M12,4A4,4 0 0,1 16,8C16,9.95 14.6,11.58 12.75,11.93L8.07,7.25C8.42,5.4 10.05,4 12,4M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6Z"></path></svg></div>
+          <h3 class="card-title">No account and no server</h3>
+          <p class="card-text">There is nothing to sign into, and watch state never leaves the device.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon tertiary"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21,11C21,16.55 17.16,21.74 12,23C6.84,21.74 3,16.55 3,11V5L12,1L21,5V11M12,21C15.75,20 19,15.54 19,11.22V6.3L12,3.18L5,6.3V11.22C5,15.54 8.25,20 12,21M14.8,11V9.5C14.8,8.1 13.4,7 12,7C10.6,7 9.2,8.1 9.2,9.5V11C8.6,11 8,11.6 8,12.2V15.7C8,16.4 8.6,17 9.2,17H14.7C15.4,17 16,16.4 16,15.8V12.3C16,11.6 15.4,11 14.8,11M13.5,11H10.5V9.5C10.5,8.7 11.2,8.2 12,8.2C12.8,8.2 13.5,8.7 13.5,9.5V11Z"></path></svg></div>
+          <h3 class="card-title">Credentials stay on device</h3>
+          <p class="card-text">A debrid key lives inside the source URL you added, and backup files leave credential-bearing keys out.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon tertiary"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M13 14C9.64 14 8.54 15.35 8.18 16.24C9.25 16.7 10 17.76 10 19C10 20.66 8.66 22 7 22S4 20.66 4 19C4 17.69 4.83 16.58 6 16.17V7.83C4.83 7.42 4 6.31 4 5C4 3.34 5.34 2 7 2S10 3.34 10 5C10 6.31 9.17 7.42 8 7.83V13.12C8.88 12.47 10.16 12 12 12C14.67 12 15.56 10.66 15.85 9.77C14.77 9.32 14 8.25 14 7C14 5.34 15.34 4 17 4S20 5.34 20 7C20 8.34 19.12 9.5 17.91 9.86C17.65 11.29 16.68 14 13 14M7 18C6.45 18 6 18.45 6 19S6.45 20 7 20 8 19.55 8 19 7.55 18 7 18M7 4C6.45 4 6 4.45 6 5S6.45 6 7 6 8 5.55 8 5 7.55 4 7 4M17 6C16.45 6 16 6.45 16 7S16.45 8 17 8 18 7.55 18 7 17.55 6 17 6M20.12 14.46L18 16.59L15.88 14.47L14.47 15.88L16.59 18L14.47 20.12L15.88 21.54L18 19.41L20.12 21.54L21.54 20.12L19.41 18L21.54 15.88L20.12 14.46Z"></path></svg></div>
+          <h3 class="card-title">You decide what it searches</h3>
+          <p class="card-text">With no sources configured, the app queries no one for releases at all.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 2rem;">
+        <h4 style="font-size: 0.95rem; color: var(--text-dim);">Besides the sources you add and the peers your torrents connect to, Surfex reaches:</h4>
+        <div class="grid-4" style="margin-top: 1rem;">
+          <div>
+            <div style="font-weight: 700; color: var(--primary);">TMDB</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Posters, backdrops, synopses, cast and ratings, and the title → IMDb ID lookup</p>
+          </div>
+          <div>
+            <div style="font-weight: 700; color: var(--primary);">Stremio's public addons</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">The OpenSubtitles list, and fallback metadata</p>
+          </div>
+          <div>
+            <div style="font-weight: 700; color: var(--primary);">YouTube</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">A title's trailer, on the no-cookie domain</p>
+          </div>
+          <div>
+            <div style="font-weight: 700; color: var(--primary);">GitHub</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">One unauthenticated request at startup asking whether a newer release exists</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="feature-section wrap">
+      <div class="text-center">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title">The questions that keep coming up</h2>
+      </div>
+
+      <div class="faq-wrap">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does Surfex provide content?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Surfex hosts no media, indexes no torrents, runs no scrapers, and ships with nowhere to search. It is a local player and media library manager that only plays torrents, magnets, or source addons that you explicitly provide.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Why won't you bundle a default source?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Because bundling sources would make Surfex responsible for indexing third-party servers and cataloging content. By shipping completely clean with no default sources, Surfex remains 100% legal, open source, and agnostic to what you choose to stream.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do I need a source at all?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. You can paste magnet links or drop .torrent files directly into the downloads tab. Surfex functions as a complete BitTorrent player and downloader without any sources installed.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is Surfex affiliated with Stremio?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Surfex is an independent open-source project. It simply supports the public Stremio HTTP addon protocol so that community addons work as source providers if you wish.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Why is there no plugin system?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>To keep the application secure, fast, and lightweight. Running arbitrary third-party executable code inside the app could introduce security vulnerabilities. The addon JSON protocol gives you all the flexibility without executing untrusted scripts on your system.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Why Tauri instead of Electron?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Tauri uses the system's native webview paired with a high-performance Rust backend. This uses a fraction of Electron's RAM, opens instantly, and enables native parent-window integration for mpv and librqbit.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does it work on a TV?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Surfex has a dedicated Android TV build with full D-pad remote navigation, focus styles, performance switches, and 10-foot UI scaling. Check the <a href="/tv/" style="color:var(--primary);text-decoration:underline;">TV installation guide</a>.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is there a phone app?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Surfex builds for Android smartphones and tablets, featuring touch navigation, background download service, and automatic orientation handling.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>macOS says Surfex is damaged. Is it?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Because open-source builds are not signed with a paid Apple Developer certificate ($99/year), macOS Gatekeeper displays a warning. You can allow it by running <code>xattr -cr /Applications/Surfex.app</code> in Terminal or right-clicking and choosing "Open".</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Banner -->
+    <section class="wrap">
+      <div class="cta-banner">
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: #ffffff;">Put it on the machine you actually watch things on</h2>
+        <p class="lead" style="margin-top: 0.75rem;">One download, no account, and a first run that searches absolutely nothing until you tell it where to look.</p>
+        <div class="hero-cta">
+          <a href="/download/" class="btn btn-primary btn-lg">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"></path></svg>
+            <span>Download Surfex</span>
+          </a>
+          <a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series" target="_blank" rel="noopener" class="btn btn-tonal btn-lg">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg>
+            <span>Read the source</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-link">
+            <img src="/assets/logo.svg" alt="Surfex Logo" class="brand-logo">
+            <span>Surfex</span>
+          </div>
+          <p class="footer-desc">A media library and BitTorrent player for the desktop and Android TV. Free, MIT-licensed, and built to be used from a sofa.</p>
+          <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series" target="_blank" rel="noopener" class="btn btn-tonal btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path></svg>
+              <span>GitHub</span>
+            </a>
+            <a href="/support/" class="btn btn-tonal-primary btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
+              <span>Support / Donate</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Get it</div>
+          <ul class="footer-links">
+            <li><a href="/download/">Download</a></li>
+            <li><a href="/tv/">Install on a TV</a></li>
+            <li><a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series/releases" target="_blank" rel="noopener">All releases</a></li>
+            <li><a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series#readme" target="_blank" rel="noopener">Build from source</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Learn</div>
+          <ul class="footer-links">
+            <li><a href="#features">Feature tour</a></li>
+            <li><a href="#sources">Sources</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="/support/">Support</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">Project</div>
+          <ul class="footer-links">
+            <li><a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series/issues" target="_blank" rel="noopener">Issues</a></li>
+            <li><a href="https://github.com/smartworldarafath/Surfex---Movies-and-Series/blob/main/LICENSE" target="_blank" rel="noopener">Licence (MIT)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Surfex contributors · MIT</span>
+        <span style="display: flex; align-items: center; gap: 0.5rem;">
+          Metadata by <img src="/assets/tmdb.svg" alt="TMDB" height="12" style="height:12px; opacity:0.7;">
+        </span>
+        <span style="max-width: 65ch;">This product uses the TMDB API but is not endorsed or certified by TMDB. Surfex hosts no content, indexes no content, and ships with no sources configured.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
