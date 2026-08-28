@@ -380,7 +380,8 @@ function buildAndroid(extra: string[]) {
   // JavascriptInterface bridges are reachable only from the frontend. proguard-rules.pro
   // keeps them — check playback and TV detection still work after touching that file.
   console.log(`\n→ Building a signed release APK for ${ANDROID_ABIS.join(' + ')}\n`)
-  run(['tauri', 'android', 'build', '--apk', '--target', ...ANDROID_ABIS, ...extra], env)
+  const targetFlags = ANDROID_ABIS.flatMap(a => ['--target', a])
+  run(['tauri', 'android', 'build', '--apk', ...targetFlags, ...extra], env)
 
   const out = 'src-tauri/gen/android/app/build/outputs/apk/universal/release/'
   console.log(
