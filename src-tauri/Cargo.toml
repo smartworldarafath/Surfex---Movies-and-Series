@@ -1,6 +1,6 @@
 [package]
 name = "surfex"
-version = "0.1.0"
+version = "0.4.0"
 description = "A media library and BitTorrent player for Movies and Series, on desktop, mobile and Android TV"
 authors = [ "smartworldarafath" ]
 license = "MIT"

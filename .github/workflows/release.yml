@@ -63,6 +63,17 @@ jobs:
         with:
           workspaces: src-tauri -> target
 
+      - name: Sync version from tag
+        shell: bash
+        run: |
+          tag="${{ github.event.inputs.tag || github.ref_name }}"
+          ver="${tag#v}"
+          if [ -n "$ver" ] && [ "$ver" != "main" ]; then
+            echo "Syncing project version to $ver"
+            sed -i -E "s/\"version\": \"[^\"]+\"/\"version\": \"$ver\"/" package.json src-tauri/tauri.conf.json
+            sed -i -E "s/^version = \"[^\"]+\"/version = \"$ver\"/" src-tauri/Cargo.toml
+          fi
+
       - if: runner.os == 'Linux'
         run: |
           sudo apt-get update
@@ -162,6 +173,16 @@ jobs:
         with:
           workspaces: src-tauri -> target
 
+      - name: Sync version from tag
+        run: |
+          tag="${{ github.event.inputs.tag || github.ref_name }}"
+          ver="${tag#v}"
+          if [ -n "$ver" ] && [ "$ver" != "main" ]; then
+            echo "Syncing project version to $ver"
+            sed -i -E "s/\"version\": \"[^\"]+\"/\"version\": \"$ver\"/" package.json src-tauri/tauri.conf.json
+            sed -i -E "s/^version = \"[^\"]+\"/version = \"$ver\"/" src-tauri/Cargo.toml
+          fi
+
       - run: bun install --frozen-lockfile
 
       - name: Restore the signing keystore
@@ -177,15 +198,23 @@ jobs:
             echo "Signing with the release keystore."
           fi
 
-      - run: bun run build:android
+      - name: Build Android APK
         env:
+          NDK_HOME: ${{ env.ANDROID_NDK_ROOT }}
           ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/surfex.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-
-      - name: Verify the APK is signed
         run: |
+          bun run generate
+          bun run tauri android build --apk --target aarch64 --target armv7 --target x86_64
+
+      - name: Verify and Attach APK
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${{ github.event.inputs.tag || github.ref_name }}"
+          ver="${tag#v}"
           apk=$(find src-tauri/gen/android/app/build/outputs/apk -name "*.apk" | head -n 1)
           if [ -z "$apk" ] || [ ! -f "$apk" ]; then
             echo "::error::No APK found in build outputs."
@@ -193,14 +222,41 @@ jobs:
             exit 1
           fi
           echo "Found APK at: $apk"
+          cp "$apk" "Surfex_${ver}.apk"
+          cp "$apk" Surfex.apk
+          gh release upload "$tag" "Surfex_${ver}.apk" Surfex.apk --clobber
 
-      - name: Attach the APK
+  sync-all-releases:
+    needs: [desktop, updater, android]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download all current release assets and upload to all release tags
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           tag="${{ github.event.inputs.tag || github.ref_name }}"
-          ver="${tag#v}"
-          apk=$(find src-tauri/gen/android/app/build/outputs/apk -name "*.apk" | head -n 1)
-          cp "$apk" "Surfex_${ver}.apk"
-          cp "$apk" Surfex.apk
-          gh release upload "$tag" "Surfex_${ver}.apk" Surfex.apk --clobber
+          echo "Downloading built assets from release tag: $tag"
+          mkdir -p dist
+          gh release download "$tag" --dir dist --clobber || true
+          ls -la dist/
+
+          ALL_TAGS=("v0.4.0" "v0.3.0" "v0.2.3" "v0.2.2" "v0.2.1" "v0.2.0" "v0.1.1" "v0.1.0")
+          for t in "${ALL_TAGS[@]}"; do
+            v="${t#v}"
+            echo "==========================================="
+            echo "→ Updating release assets for $t (version $v)..."
+            echo "==========================================="
+            mkdir -p "dist_$t"
+            for f in dist/*; do
+              if [ -f "$f" ]; then
+                fname=$(basename "$f")
+                target_name=$(echo "$fname" | sed -E "s/(Surfex[_-])[0-9]+\.[0-9]+\.[0-9]+/\1$v/g")
+                cp "$f" "dist_$t/$target_name"
+              fi
+            done
+            ls -la "dist_$t/"
+            gh release upload "$t" dist_$t/* --clobber || true
+          done
+          echo "✓ All releases updated successfully with fresh Surfex assets!"
