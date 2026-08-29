@@ -173,16 +173,6 @@ jobs:
         with:
           workspaces: src-tauri -> target
 
-      - name: Sync version from tag
-        run: |
-          tag="${{ github.event.inputs.tag || github.ref_name }}"
-          ver="${tag#v}"
-          if [ -n "$ver" ] && [ "$ver" != "main" ]; then
-            echo "Syncing project version to $ver"
-            sed -i -E "s/\"version\": \"[^\"]+\"/\"version\": \"$ver\"/" package.json src-tauri/tauri.conf.json
-            sed -i -E "s/^version = \"[^\"]+\"/version = \"$ver\"/" src-tauri/Cargo.toml
-          fi
-
       - run: bun install --frozen-lockfile
 
       - name: Restore the signing keystore
