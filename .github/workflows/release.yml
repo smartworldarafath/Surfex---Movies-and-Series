@@ -198,9 +198,16 @@ jobs:
             echo "Signing with the release keystore."
           fi
 
+      - name: Setup Android NDK
+        run: |
+          NDK_PATH=$(find "$ANDROID_HOME/ndk" -maxdepth 1 -mindepth 1 | sort -V | tail -n 1)
+          echo "Found NDK: $NDK_PATH"
+          echo "NDK_HOME=$NDK_PATH" >> $GITHUB_ENV
+          echo "ANDROID_NDK_HOME=$NDK_PATH" >> $GITHUB_ENV
+          echo "ANDROID_NDK_ROOT=$NDK_PATH" >> $GITHUB_ENV
+
       - name: Build Android APK
         env:
-          NDK_HOME: ${{ env.ANDROID_NDK_ROOT }}
           ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/surfex.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
