@@ -61,10 +61,25 @@ export interface Media {
   seasons?: { number: number, episodes: number }[]
 }
 
+const DEFAULT_TMDB_KEY = '15d2ea6d0dc1d476efbca3eba2b9bbfb'
+
 export function tmdb<T>(path: string, params?: Record<string, unknown>) {
   // The user's own token wins when they have set one — see `tmdbKey` in the
   // settings store for why that escape hatch exists.
-  const key = useSettingsStore().tmdbKey || useRuntimeConfig().public.TMDB_API
+  const key = useSettingsStore().tmdbKey || useRuntimeConfig().public.TMDB_API || DEFAULT_TMDB_KEY
+
+  const isJwt = key && key.startsWith('eyJ')
+  const headers: Record<string, string> = {}
+  const queryParams: Record<string, unknown> = {
+    language: tmdbLanguage(),
+    ...params,
+  }
+
+  if (isJwt) {
+    headers.Authorization = `Bearer ${key}`
+  } else if (key) {
+    queryParams.api_key = key
+  }
 
   return $fetch<T>(path, {
     baseURL: 'https://api.themoviedb.org/3',
@@ -72,8 +87,8 @@ export function tmdb<T>(path: string, params?: Record<string, unknown>) {
     // regional tag TMDB wants (`pt-BR` for the `pt` the URL carries) — see
     // `tmdbLanguage`. TMDB falls back to English per field, so a language it
     // has nothing in still returns a usable record.
-    params: { language: tmdbLanguage(), ...params },
-    headers: { Authorization: `Bearer ${key}` },
+    params: queryParams,
+    headers,
   })
 }
 

@@ -103,7 +103,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      TMDB_API: process.env.TMDB_API,
+      TMDB_API: process.env.TMDB_API || '15d2ea6d0dc1d476efbca3eba2b9bbfb',
       // The language picker's flags, worked out at build time — see `flags`.
       flags,
     },
