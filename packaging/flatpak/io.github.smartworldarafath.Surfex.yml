@@ -66,7 +66,7 @@ cleanup:
   - '*.la'
 
 modules:
-  # ffmpeg is built rather than taken from the runtime because Surfex runs the
+  # ffmpeg is built rather than taken from the runtime because Ventic runs the
   # `ffmpeg` *binary* for two things — one mjpeg frame for the seek-bar preview,
   # and an RMS envelope for subtitle sync (see `thumbnail` and `audio_envelope`
   # in src-tauri/src/lib.rs). Encoders, muxers and programs are therefore all
@@ -167,8 +167,9 @@ modules:
       # does, but macOS is not built from this manifest.)
       - -Dlibmpv=false
       # Surfex sends commands down input-ipc-server, so mpv's own scripting
-      # runtimes are dead weight.
-      - -Dlua=disabled
+      # is not required, but lua is enabled because without it some of mpv's
+      # built-in format hooks do not fire.
+      - -Dlua=enabled
       - -Djavascript=disabled
       # Optical media and editing filters: nothing here can reach a disc, and
       # speed changes use mpv's built-in scaletempo2.
