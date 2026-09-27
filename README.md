@@ -689,8 +689,6 @@ If you find **Surfex   Movies and Series** helpful and want to support ongoing d
 
 ---
 
-## ☕ Support / Buy Me a Coffee & Become a Sponsor
-
 <div align="center">
 
 <a href="SUPPORT.md" target="_blank">
